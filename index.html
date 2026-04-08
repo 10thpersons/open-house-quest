@@ -701,7 +701,35 @@
           <button class="btn btn-cyan" style="flex:1; font-size:7px; padding:10px 4px;"
             onclick="openNav('waze');SFX.click()">🚗 Waze</button>
         </div>
-        <button class="btn btn-gold btn-full" onclick="go('s5');SFX.confirm()">Dah tahu jalan? Jom! ▶</button>
+        <button class="btn btn-gold btn-full" onclick="go('s4b');SFX.confirm()">Dah tahu jalan? Jom! ▶</button>
+      </div>
+    </div>
+
+    <!-- ====== SCREEN 4b: RELATION TYPE ====== -->
+    <div id="s4b" class="screen bg-day">
+      <div class="panel" style="justify-content:center;">
+        <div class="section-title">🏠 SIAPA KAMU?</div>
+        <div class="divider"></div>
+        <div class="pixel-text" style="text-align:center; margin-bottom:8px;">Kau datang sebagai...</div>
+        <div class="pixel-text" style="font-size:8px; color:#666; text-align:center; margin-bottom:20px;">
+          Ini untuk kami pastikan sesi tak sesak!
+        </div>
+
+        <button class="time-card" id="rel-family" onclick="pickRelation('family')" style="width:100%; margin-bottom:12px; padding:18px 12px;">
+          👨‍👩‍👧‍👦<br>
+          <span style="font-size:11px;">KELUARGA</span>
+          <span class="flavour">Sesi khas: 5pm & 8pm sahaja 🌅🌙</span>
+        </button>
+
+        <button class="time-card" id="rel-friends" onclick="pickRelation('friends')" style="width:100%; padding:18px 12px;">
+          👫<br>
+          <span style="font-size:11px;">KAWAN / RAKAN SEKERJA</span>
+          <span class="flavour">Sesi: 1pm, 3pm & 5pm 🌞</span>
+        </button>
+
+        <div style="display:flex; gap:8px; width:100%; margin-top:16px;">
+          <button class="btn btn-green" style="flex:1;" onclick="go('s4');SFX.nav()">◀ BACK</button>
+        </div>
       </div>
     </div>
 
@@ -730,7 +758,7 @@
           </button>
         </div>
         <div style="display:flex; gap:8px; width:100%;">
-          <button class="btn btn-green" style="flex:1;" onclick="go('s4');SFX.nav()">◀ BACK</button>
+          <button class="btn btn-green" style="flex:1;" onclick="go('s4b');SFX.nav()">◀ BACK</button>
           <button class="btn btn-gold" style="flex:2; opacity:0.5;" id="time-next" disabled
             onclick="toCutscene()">CONFIRM ▶</button>
         </div>
@@ -823,7 +851,8 @@
       partyMode: 'solo',
       extras: 0,
       guests: [],
-      slot: null
+      slot: null,
+      relation: null
     };
 
     const SB_URL = 'https://euebcmtbrnmyvqvwidpd.supabase.co';
@@ -1332,6 +1361,39 @@
       else window.open('https://ul.waze.com/ul?place=ChIJvwDP-T3LzTERnmiDz7MfNDo&ll=3.02511840%2C101.79150720&navigate=yes&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location', '_blank');
     }
 
+    // ==================== RELATION TYPE ====================
+    function pickRelation(type) {
+      SFX.select();
+      S.relation = type;
+      S.slot = null;
+
+      // Reset slot selection
+      ['1pm','3pm','5pm','8pm'].forEach(s => document.getElementById('tc-'+s).classList.remove('on'));
+      const nb = document.getElementById('time-next');
+      nb.disabled = true; nb.style.opacity = '0.5';
+
+      // Show/hide slots based on relation
+      const familyOnly = ['8pm'];       // only 8pm exclusive to family
+      const friendsOnly = ['1pm','3pm']; // only 1pm,3pm exclusive to friends
+      // 5pm is shared by both
+
+      if (type === 'family') {
+        // Show 5pm & 8pm, hide 1pm & 3pm
+        ['1pm','3pm'].forEach(s => { document.getElementById('tc-'+s).style.display='none'; });
+        ['5pm','8pm'].forEach(s => { document.getElementById('tc-'+s).style.display=''; });
+      } else {
+        // Show 1pm, 3pm & 5pm, hide 8pm
+        ['8pm'].forEach(s => { document.getElementById('tc-'+s).style.display='none'; });
+        ['1pm','3pm','5pm'].forEach(s => { document.getElementById('tc-'+s).style.display=''; });
+      }
+
+      // Highlight chosen relation button
+      ['rel-family','rel-friends'].forEach(id => document.getElementById(id).classList.remove('on'));
+      document.getElementById('rel-'+type).classList.add('on');
+
+      go('s5');
+    }
+
     // ==================== TIME SLOT ====================
     function pickTime(slot) {
       SFX.select();
@@ -1553,7 +1615,8 @@
           body: JSON.stringify({
             guest_name: S.name, gender: S.gender, has_hijab: S.hijab,
             attire_colour: S.attire, time_slot: S.slot, total_pax: total,
-            adult_male: am, adult_female: af, toddler_male: tm, toddler_female: tf
+            adult_male: am, adult_female: af, toddler_male: tm, toddler_female: tf,
+            relation_type: S.relation
           })
         });
         if (r.ok) { msg.textContent = '✅ RSVP tersimpan! Jumpa di sana! 🎉'; msg.style.color = '#4a8f29'; }
@@ -1575,7 +1638,10 @@
 
     function submitNew() {
       S.name = ''; S.gender = 'male'; S.style = 'A'; S.hijab = false; S.attire = 'matcha';
-      S.partyMode = 'solo'; S.extras = 0; S.guests = []; S.slot = null; _gCount = 1;
+      S.partyMode = 'solo'; S.extras = 0; S.guests = []; S.slot = null; S.relation = null; _gCount = 1;
+      // Reset slot visibility
+      ['1pm','3pm','5pm','8pm'].forEach(s => { document.getElementById('tc-'+s).style.display=''; });
+      ['rel-family','rel-friends'].forEach(id => document.getElementById(id).classList.remove('on'));
       document.getElementById('inp-name').value = '';
       document.getElementById('inp-hijab').checked = false;
       document.getElementById('hijab-row').style.display = 'none';
@@ -1868,6 +1934,8 @@
         const totalPax    = data.reduce((s,x) => s + (x.total_pax||1), 0);
         const totalAdult  = data.reduce((s,x) => s + (x.adult_male||0) + (x.adult_female||0), 0);
         const totalToddler= data.reduce((s,x) => s + (x.toddler_male||0) + (x.toddler_female||0), 0);
+        const totalFamily = data.filter(x=>x.relation_type==='family').reduce((s,x)=>s+(x.total_pax||1),0);
+        const totalFriends= data.filter(x=>x.relation_type==='friends').reduce((s,x)=>s+(x.total_pax||1),0);
         const slots = {'1pm':0,'3pm':0,'5pm':0,'8pm':0};
         data.forEach(x => { if(slots[x.time_slot]!==undefined) slots[x.time_slot]+=(x.total_pax||1); });
 
@@ -1879,6 +1947,8 @@
               ['📋','Total RSVP',data.length+' kumpulan','#1565c0','#90caf9'],
               ['🧑','Dewasa',totalAdult+' orang','#6a1b9a','#ce93d8'],
               ['🍼','Kanak-kanak',totalToddler+' orang','#e65100','#ffcc80'],
+              ['👨‍👩‍👧‍👦','Keluarga',totalFamily+' orang','#4e342e','#ffccbc'],
+              ['👫','Kawan/Rakan',totalFriends+' orang','#004d40','#80cbc4'],
             ].map(([icon,label,val,bg,col])=>`
               <div style="background:#111;border:2px solid ${bg};border-radius:8px;padding:16px 20px;min-width:140px;flex:1;">
                 <div style="font-size:22px;margin-bottom:6px;">${icon}</div>
@@ -1917,6 +1987,7 @@
                 <th style="padding:10px 12px;border-bottom:2px solid #333;">Total</th>
                 <th style="padding:10px 12px;border-bottom:2px solid #333;">Dewasa ♂/♀</th>
                 <th style="padding:10px 12px;border-bottom:2px solid #333;">Kanak ♂/♀</th>
+                <th style="padding:10px 12px;border-bottom:2px solid #333;">Jenis</th>
                 <th style="padding:10px 12px;border-bottom:2px solid #333;">Baju</th>
                 <th style="padding:10px 12px;border-bottom:2px solid #333;">Tarikh & Masa</th>
               </tr>
@@ -1931,6 +2002,7 @@
                   <td style="padding:10px 12px;color:#a5d6a7;font-weight:bold;">${x.total_pax||1} pax</td>
                   <td style="padding:10px 12px;">${x.adult_male||0}♂ / ${x.adult_female||0}♀</td>
                   <td style="padding:10px 12px;">${x.toddler_male||0}♂ / ${x.toddler_female||0}♀</td>
+                  <td style="padding:10px 12px;">${x.relation_type==='family'?'👨‍👩‍👧‍👦 Keluarga':x.relation_type==='friends'?'👫 Kawan':'-'}</td>
                   <td style="padding:10px 12px;text-transform:capitalize;">${x.attire_colour||'-'}</td>
                   <td style="padding:10px 12px;font-size:12px;color:#ccc;">${fmt(x.created_at)}</td>
                 </tr>`).join('')}
