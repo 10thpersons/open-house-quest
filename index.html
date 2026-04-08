@@ -1844,18 +1844,14 @@
 
     // ==================== ADMIN PAGE ====================
     async function showAdminPage() {
+      document.body.style.cssText = 'margin:0;padding:0;background:#0a0a1e;font-family:Arial,sans-serif;';
       document.body.innerHTML = `
-    <div id="admin-wrap" style="
-      font-family:'Press Start 2P',monospace;
-      background:#0a0a1e; color:#ffe082;
-      min-height:100vh; padding:24px 16px;
-      max-width:600px; margin:auto;
-    ">
-      <div style="font-size:18px; margin-bottom:8px;">🏠 ADMIN PANEL</div>
-      <div style="font-size:10px; color:#81d4fa; margin-bottom:24px;">Open House Quest RSVP</div>
-      <div id="admin-stats" style="font-size:11px; color:#aaa;">Loading...</div>
-      <div id="admin-list" style="margin-top:24px;"></div>
-    </div>`;
+        <div style="max-width:900px;margin:auto;padding:24px 16px;">
+          <div style="font-family:\'Press Start 2P\',monospace;color:#ffe082;font-size:16px;margin-bottom:4px;">🏠 ADMIN PANEL</div>
+          <div style="font-family:\'Press Start 2P\',monospace;color:#81d4fa;font-size:9px;margin-bottom:24px;">Open House Quest: Final Fantasy Ketupat</div>
+          <div id="admin-stats">Loading...</div>
+          <div id="admin-list" style="margin-top:28px;"></div>
+        </div>`;
 
       if (SB_URL === 'YOUR_SUPABASE_URL') {
         document.getElementById('admin-stats').innerHTML =
@@ -1869,30 +1865,80 @@
         });
         const data = await r.json();
 
-        const totalPeople = data.reduce((s, x) => s + (x.total_pax || 1), 0);
-        const slots = { '1pm': 0, '3pm': 0, '5pm': 0, '8pm': 0 };
-        data.forEach(x => { if (slots[x.time_slot] !== undefined) slots[x.time_slot] += (x.total_pax || 1); });
+        const totalPax    = data.reduce((s,x) => s + (x.total_pax||1), 0);
+        const totalAdult  = data.reduce((s,x) => s + (x.adult_male||0) + (x.adult_female||0), 0);
+        const totalToddler= data.reduce((s,x) => s + (x.toddler_male||0) + (x.toddler_female||0), 0);
+        const slots = {'1pm':0,'3pm':0,'5pm':0,'8pm':0};
+        data.forEach(x => { if(slots[x.time_slot]!==undefined) slots[x.time_slot]+=(x.total_pax||1); });
 
+        // Summary cards
         document.getElementById('admin-stats').innerHTML = `
-      <div style="background:#1a2a1a;border:2px solid #4a8f29;padding:16px;margin-bottom:16px;border-radius:4px;">
-        <div style="font-size:14px;color:#a5d6a7;margin-bottom:12px;">📊 RINGKASAN</div>
-        <div style="margin-bottom:8px;">🧑‍🤝‍🧑 Total RSVP: <span style="color:#fff">${data.length} kumpulan</span></div>
-        <div style="margin-bottom:16px;">👥 Total Orang: <span style="color:#ffe082;font-size:14px">${totalPeople}</span></div>
-        <div style="font-size:9px;color:#81d4fa;margin-bottom:6px;">SLOT:</div>
-        ${Object.entries(slots).map(([s, c]) => `<div style="margin-bottom:4px;">🕐 ${s}: <span style="color:#fff">${c} orang</span></div>`).join('')}
-      </div>`;
+          <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:24px;">
+            ${[
+              ['👥','Total Hadir',totalPax+' orang','#4a8f29','#a5d6a7'],
+              ['📋','Total RSVP',data.length+' kumpulan','#1565c0','#90caf9'],
+              ['🧑','Dewasa',totalAdult+' orang','#6a1b9a','#ce93d8'],
+              ['🍼','Kanak-kanak',totalToddler+' orang','#e65100','#ffcc80'],
+            ].map(([icon,label,val,bg,col])=>`
+              <div style="background:#111;border:2px solid ${bg};border-radius:8px;padding:16px 20px;min-width:140px;flex:1;">
+                <div style="font-size:22px;margin-bottom:6px;">${icon}</div>
+                <div style="color:#aaa;font-size:12px;margin-bottom:4px;">${label}</div>
+                <div style="color:${col};font-size:22px;font-weight:bold;">${val}</div>
+              </div>`).join('')}
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:8px;">
+            ${Object.entries(slots).map(([s,c])=>`
+              <div style="background:#111;border:1px solid #333;border-radius:6px;padding:12px 16px;min-width:100px;text-align:center;">
+                <div style="color:#ffe082;font-size:13px;font-weight:bold;">🕐 ${s}</div>
+                <div style="color:#fff;font-size:18px;font-weight:bold;margin-top:4px;">${c}</div>
+                <div style="color:#aaa;font-size:11px;">orang</div>
+              </div>`).join('')}
+          </div>`;
 
-        const listHtml = data.map((x, i) => `
-      <div style="background:#111;border:1px solid #333;padding:12px;margin-bottom:8px;font-size:9px;">
-        <div style="color:#ffe082;margin-bottom:6px;">#${i + 1} ${esc(x.guest_name || '?')}</div>
-        <div style="color:#aaa;">⏰ ${x.time_slot} &nbsp;|&nbsp; 👥 ${x.total_pax || 1} orang</div>
-        <div style="color:#aaa;margin-top:4px;">👗 ${x.attire_colour || '-'} &nbsp;|&nbsp; ${x.gender === 'female' ? '👩' : '👨'}</div>
-      </div>`).join('');
+        // Guest table
+        const fmt = ts => {
+          if(!ts) return '-';
+          const d = new Date(ts);
+          const date = d.toLocaleDateString('ms-MY',{day:'2-digit',month:'short',year:'numeric'});
+          const time = d.toLocaleTimeString('ms-MY',{hour:'2-digit',minute:'2-digit'});
+          return `${date}<br><span style="color:#aaa">${time}</span>`;
+        };
 
-        document.getElementById('admin-list').innerHTML =
-          `<div style="font-size:10px;color:#81d4fa;margin-bottom:12px;">📋 SENARAI TETAMU</div>` + listHtml;
+        document.getElementById('admin-list').innerHTML = `
+          <div style="color:#81d4fa;font-size:13px;font-weight:bold;margin-bottom:12px;">📋 SENARAI TETAMU</div>
+          <div style="overflow-x:auto;">
+          <table style="width:100%;border-collapse:collapse;font-size:13px;color:#fff;">
+            <thead>
+              <tr style="background:#1a1a3e;color:#ffe082;text-align:left;">
+                <th style="padding:10px 12px;border-bottom:2px solid #333;">#</th>
+                <th style="padding:10px 12px;border-bottom:2px solid #333;">Nama</th>
+                <th style="padding:10px 12px;border-bottom:2px solid #333;">Gender</th>
+                <th style="padding:10px 12px;border-bottom:2px solid #333;">Slot</th>
+                <th style="padding:10px 12px;border-bottom:2px solid #333;">Total</th>
+                <th style="padding:10px 12px;border-bottom:2px solid #333;">Dewasa ♂/♀</th>
+                <th style="padding:10px 12px;border-bottom:2px solid #333;">Kanak ♂/♀</th>
+                <th style="padding:10px 12px;border-bottom:2px solid #333;">Baju</th>
+                <th style="padding:10px 12px;border-bottom:2px solid #333;">Tarikh & Masa</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${data.map((x,i)=>`
+                <tr style="background:${i%2===0?'#111':'#161625'};border-bottom:1px solid #222;">
+                  <td style="padding:10px 12px;color:#aaa;">${i+1}</td>
+                  <td style="padding:10px 12px;color:#ffe082;font-weight:bold;">${esc(x.guest_name||'?')}</td>
+                  <td style="padding:10px 12px;">${x.gender==='female'?'👩 Perempuan':'👨 Lelaki'}</td>
+                  <td style="padding:10px 12px;color:#81d4fa;">🕐 ${x.time_slot||'-'}</td>
+                  <td style="padding:10px 12px;color:#a5d6a7;font-weight:bold;">${x.total_pax||1} pax</td>
+                  <td style="padding:10px 12px;">${x.adult_male||0}♂ / ${x.adult_female||0}♀</td>
+                  <td style="padding:10px 12px;">${x.toddler_male||0}♂ / ${x.toddler_female||0}♀</td>
+                  <td style="padding:10px 12px;text-transform:capitalize;">${x.attire_colour||'-'}</td>
+                  <td style="padding:10px 12px;font-size:12px;color:#ccc;">${fmt(x.created_at)}</td>
+                </tr>`).join('')}
+            </tbody>
+          </table>
+          </div>`;
 
-      } catch (e) {
+      } catch(e) {
         document.getElementById('admin-stats').innerHTML =
           '<span style="color:#e57373">⚠️ Gagal sambung ke Supabase.</span>';
       }
