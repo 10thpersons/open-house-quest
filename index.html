@@ -233,6 +233,13 @@
     .ketupat-rain { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
     .k-drop { position: absolute; animation: spin-fall linear infinite; }
 
+    /* === NIGHT MODE overrides for time slot screen === */
+    .bg-night .pixel-text  { color: #fff; text-shadow: 1px 1px 0 rgba(0,0,0,0.8); }
+    .bg-night .pixel-label { color: #fff; text-shadow: 1px 1px 0 rgba(0,0,0,0.8); }
+    .bg-night .divider     { background: repeating-linear-gradient(90deg,#fff 0,#fff 4px,transparent 4px,transparent 8px); }
+    .bg-night .time-card   { border-color: rgba(255,255,255,0.85); color: #1a1a1a; }
+    .bg-night .time-card.on { border-color: #ffd700; }
+
     /* === NOTIFICATION === */
     #notif {
       position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
