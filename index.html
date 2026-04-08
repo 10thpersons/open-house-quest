@@ -1542,7 +1542,69 @@ function notify(msg){
 }
 
 // ==================== BOOT ====================
-window.addEventListener('load', initTitle);
+window.addEventListener('load', () => {
+  if (new URLSearchParams(location.search).has('admin')) {
+    showAdminPage();
+  } else {
+    initTitle();
+  }
+});
+
+// ==================== ADMIN PAGE ====================
+async function showAdminPage() {
+  document.body.innerHTML = `
+    <div id="admin-wrap" style="
+      font-family:'Press Start 2P',monospace;
+      background:#0a0a1e; color:#ffe082;
+      min-height:100vh; padding:24px 16px;
+      max-width:600px; margin:auto;
+    ">
+      <div style="font-size:18px; margin-bottom:8px;">🏠 ADMIN PANEL</div>
+      <div style="font-size:10px; color:#81d4fa; margin-bottom:24px;">Open House Quest RSVP</div>
+      <div id="admin-stats" style="font-size:11px; color:#aaa;">Loading...</div>
+      <div id="admin-list" style="margin-top:24px;"></div>
+    </div>`;
+
+  if (SB_URL === 'YOUR_SUPABASE_URL') {
+    document.getElementById('admin-stats').innerHTML =
+      '<span style="color:#e57373">⚠️ Supabase belum setup lagi!</span>';
+    return;
+  }
+
+  try {
+    const r = await fetch(SB_URL + '/rest/v1/rsvp?select=*&order=created_at.desc', {
+      headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY }
+    });
+    const data = await r.json();
+
+    const totalPeople = data.reduce((s, x) => s + (x.total_pax || 1), 0);
+    const slots = { '1pm': 0, '3pm': 0, '5pm': 0, '8pm': 0 };
+    data.forEach(x => { if (slots[x.time_slot] !== undefined) slots[x.time_slot] += (x.total_pax || 1); });
+
+    document.getElementById('admin-stats').innerHTML = `
+      <div style="background:#1a2a1a;border:2px solid #4a8f29;padding:16px;margin-bottom:16px;border-radius:4px;">
+        <div style="font-size:14px;color:#a5d6a7;margin-bottom:12px;">📊 RINGKASAN</div>
+        <div style="margin-bottom:8px;">🧑‍🤝‍🧑 Total RSVP: <span style="color:#fff">${data.length} kumpulan</span></div>
+        <div style="margin-bottom:16px;">👥 Total Orang: <span style="color:#ffe082;font-size:14px">${totalPeople}</span></div>
+        <div style="font-size:9px;color:#81d4fa;margin-bottom:6px;">SLOT:</div>
+        ${Object.entries(slots).map(([s,c])=>`<div style="margin-bottom:4px;">🕐 ${s}: <span style="color:#fff">${c} orang</span></div>`).join('')}
+      </div>`;
+
+    const listHtml = data.map((x, i) => `
+      <div style="background:#111;border:1px solid #333;padding:12px;margin-bottom:8px;font-size:9px;">
+        <div style="color:#ffe082;margin-bottom:6px;">#${i+1} ${esc(x.guest_name || '?')}</div>
+        <div style="color:#aaa;">⏰ ${x.time_slot} &nbsp;|&nbsp; 👥 ${x.total_pax || 1} orang</div>
+        <div style="color:#aaa;margin-top:4px;">👗 ${x.attire_colour || '-'} &nbsp;|&nbsp; ${x.gender === 'female' ? '👩' : '👨'}</div>
+      </div>`).join('');
+
+    document.getElementById('admin-list').innerHTML =
+      `<div style="font-size:10px;color:#81d4fa;margin-bottom:12px;">📋 SENARAI TETAMU</div>` + listHtml;
+
+  } catch(e) {
+    document.getElementById('admin-stats').innerHTML =
+      '<span style="color:#e57373">⚠️ Gagal sambung ke Supabase.</span>';
+  }
+}
 </script>
 </body>
 </html>
