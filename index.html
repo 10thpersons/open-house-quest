@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="ms">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Open House Quest: Final Fantasy Ketupat</title>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
       font-family: 'Press Start 2P', monospace;
@@ -36,22 +43,29 @@
       flex-direction: column;
       align-items: center;
     }
-    .screen.active { display: flex; }
+
+    .screen.active {
+      display: flex;
+    }
 
     /* === BACKGROUNDS === */
     .bg-day {
       background: linear-gradient(180deg,
-        #4fc3f7 0%, #87ceeb 55%,
-        #5ba233 55%, #5ba233 72%,
-        #3d7a1e 72%);
+          #4fc3f7 0%, #87ceeb 55%,
+          #5ba233 55%, #5ba233 72%,
+          #3d7a1e 72%);
     }
+
     .bg-night {
       background: linear-gradient(180deg,
-        #050518 0%, #1a1a4e 50%,
-        #0d3b1a 50%, #0a2e12 72%,
-        #071e0c 72%);
+          #050518 0%, #1a1a4e 50%,
+          #0d3b1a 50%, #0a2e12 72%,
+          #071e0c 72%);
     }
-    .bg-dark { background: #0a0a2e; }
+
+    .bg-dark {
+      background: #0a0a2e;
+    }
 
     /* === SCROLL PANEL === */
     .panel {
@@ -65,9 +79,18 @@
       gap: 10px;
       -webkit-overflow-scrolling: touch;
     }
-    .panel::-webkit-scrollbar { width: 4px; }
-    .panel::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
-    .panel::-webkit-scrollbar-thumb { background: #ffd700; }
+
+    .panel::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .panel::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .panel::-webkit-scrollbar-thumb {
+      background: #ffd700;
+    }
 
     /* === TEXT === */
     .section-title {
@@ -76,6 +99,7 @@
       text-shadow: 2px 2px 0 #000;
       text-align: center;
     }
+
     .pixel-label {
       font-size: 7px;
       color: #1a0a00;
@@ -83,13 +107,18 @@
       display: block;
       line-height: 1.8;
     }
-    .pixel-text { font-size: 7px; color: #2d2d2d; line-height: 2; }
+
+    .pixel-text {
+      font-size: 7px;
+      color: #2d2d2d;
+      line-height: 2;
+    }
 
     /* === DIVIDER === */
     .divider {
       width: 100%;
       height: 4px;
-      background: repeating-linear-gradient(90deg,#000 0,#000 4px,transparent 4px,transparent 8px);
+      background: repeating-linear-gradient(90deg, #000 0, #000 4px, transparent 4px, transparent 8px);
       flex-shrink: 0;
     }
 
@@ -105,18 +134,64 @@
       transition: transform 0.08s;
       -webkit-tap-highlight-color: transparent;
     }
-    .btn:active { transform: scale(0.93); }
-    .btn-gold  { background: #ffd700; color: #000; box-shadow: 4px 4px 0 #7a5c00; }
-    .btn-green { background: #4a8f29; color: #fff; box-shadow: 4px 4px 0 #2a5a18; }
-    .btn-red   { background: #c0392b; color: #fff; box-shadow: 4px 4px 0 #7b1f17; }
-    .btn-blue  { background: #1565c0; color: #fff; box-shadow: 4px 4px 0 #0d47a1; }
-    .btn-cyan  { background: #00838f; color: #fff; box-shadow: 4px 4px 0 #004d5f; }
-    .btn-purple { background: #6a1b9a; color: #fff; box-shadow: 4px 4px 0 #38006b; }
-    .btn-dark  { background: rgba(0,0,0,0.75); color: #fff; border-color: #fff; }
-    .btn-full  { width: 100%; }
+
+    .btn:active {
+      transform: scale(0.93);
+    }
+
+    .btn-gold {
+      background: #ffd700;
+      color: #000;
+      box-shadow: 4px 4px 0 #7a5c00;
+    }
+
+    .btn-green {
+      background: #4a8f29;
+      color: #fff;
+      box-shadow: 4px 4px 0 #2a5a18;
+    }
+
+    .btn-red {
+      background: #c0392b;
+      color: #fff;
+      box-shadow: 4px 4px 0 #7b1f17;
+    }
+
+    .btn-blue {
+      background: #1565c0;
+      color: #fff;
+      box-shadow: 4px 4px 0 #0d47a1;
+    }
+
+    .btn-cyan {
+      background: #00838f;
+      color: #fff;
+      box-shadow: 4px 4px 0 #004d5f;
+    }
+
+    .btn-purple {
+      background: #6a1b9a;
+      color: #fff;
+      box-shadow: 4px 4px 0 #38006b;
+    }
+
+    .btn-dark {
+      background: rgba(0, 0, 0, 0.75);
+      color: #fff;
+      border-color: #fff;
+    }
+
+    .btn-full {
+      width: 100%;
+    }
 
     /* === TOGGLES === */
-    .toggle-row { display: flex; gap: 8px; width: 100%; }
+    .toggle-row {
+      display: flex;
+      gap: 8px;
+      width: 100%;
+    }
+
     .toggle {
       flex: 1;
       font-family: 'Press Start 2P', monospace;
@@ -129,7 +204,13 @@
       text-align: center;
       -webkit-tap-highlight-color: transparent;
     }
-    .toggle.on { background: #ffd700; color: #000; border-color: #000; box-shadow: 3px 3px 0 #7a5c00; }
+
+    .toggle.on {
+      background: #ffd700;
+      color: #000;
+      border-color: #000;
+      box-shadow: 3px 3px 0 #7a5c00;
+    }
 
     /* === INPUT === */
     .pixel-input {
@@ -144,34 +225,69 @@
 
     /* === CHECKBOX === */
     .checkbox-row {
-      display: flex; align-items: center; gap: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
       cursor: pointer;
       font-family: 'Press Start 2P', monospace;
-      font-size: 7px; color: #1a0a00;
+      font-size: 7px;
+      color: #1a0a00;
     }
-    .checkbox-row input { width: 20px; height: 20px; cursor: pointer; accent-color: #ffd700; flex-shrink: 0; }
+
+    .checkbox-row input {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      accent-color: #ffd700;
+      flex-shrink: 0;
+    }
 
     /* === COLOUR PICKER === */
-    .colour-row { display: flex; gap: 8px; justify-content: center; width: 100%; }
+    .colour-row {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      width: 100%;
+    }
+
     .colour-opt {
       flex: 1;
-      display: flex; flex-direction: column; align-items: center;
-      gap: 5px; padding: 8px 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      padding: 8px 4px;
       border: 4px solid #555;
-      cursor: pointer; background: #fffde7;
-      font-family: 'Press Start 2P', monospace; font-size: 6px;
-      text-align: center; line-height: 1.6;
+      cursor: pointer;
+      background: #fffde7;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 6px;
+      text-align: center;
+      line-height: 1.6;
       -webkit-tap-highlight-color: transparent;
     }
-    .colour-opt.on { border-color: #ffd700; box-shadow: 0 0 0 2px #000, 0 0 0 4px #ffd700; }
-    .swatch { width: 28px; height: 28px; border: 2px solid #000; }
+
+    .colour-opt.on {
+      border-color: #ffd700;
+      box-shadow: 0 0 0 2px #000, 0 0 0 4px #ffd700;
+    }
+
+    .swatch {
+      width: 28px;
+      height: 28px;
+      border: 2px solid #000;
+    }
 
     /* === GUEST ENTRY === */
     .guest-row {
-      display: flex; align-items: center; gap: 8px; padding: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px;
       border: 2px solid #8b6914;
-      background: rgba(255,255,255,0.25);
-      width: 100%; flex-wrap: wrap;
+      background: rgba(255, 255, 255, 0.25);
+      width: 100%;
+      flex-wrap: wrap;
     }
 
     /* === QUEST SCROLL === */
@@ -180,1379 +296,1555 @@
       border: 6px solid #8b6914;
       box-shadow: 6px 6px 0 #000;
       padding: 20px;
-      width: 100%; position: relative;
+      width: 100%;
+      position: relative;
     }
-    .scroll-box::before, .scroll-box::after {
-      content: ''; position: absolute;
-      left: 8%; width: 84%; height: 8px;
-      background: #8b6914; border: 3px solid #000;
+
+    .scroll-box::before,
+    .scroll-box::after {
+      content: '';
+      position: absolute;
+      left: 8%;
+      width: 84%;
+      height: 8px;
+      background: #8b6914;
+      border: 3px solid #000;
     }
-    .scroll-box::before { top: -11px; }
-    .scroll-box::after  { bottom: -11px; }
+
+    .scroll-box::before {
+      top: -11px;
+    }
+
+    .scroll-box::after {
+      bottom: -11px;
+    }
 
     /* === TIME GRID === */
-    .time-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; }
+    .time-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      width: 100%;
+    }
+
     .time-card {
-      font-family: 'Press Start 2P', monospace; font-size: 8px;
-      padding: 16px 8px; border: 4px solid #000;
-      cursor: pointer; background: rgba(255,255,255,0.8);
-      text-align: center; line-height: 2;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 8px;
+      padding: 16px 8px;
+      border: 4px solid #000;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.8);
+      text-align: center;
+      line-height: 2;
       -webkit-tap-highlight-color: transparent;
     }
-    .time-card.on { background: #ffd700; box-shadow: 4px 4px 0 #7a5c00; }
-    .flavour { font-size: 6px; color: #555; display: block; margin-top: 4px; line-height: 1.7; }
-    .time-card.on .flavour { color: #333; }
+
+    .time-card.on {
+      background: #ffd700;
+      box-shadow: 4px 4px 0 #7a5c00;
+    }
+
+    .flavour {
+      font-size: 6px;
+      color: #555;
+      display: block;
+      margin-top: 4px;
+      line-height: 1.7;
+    }
+
+    .time-card.on .flavour {
+      color: #333;
+    }
 
     /* === PARTY SPRITES === */
     #party-sprites {
-      display: flex; gap: 6px; flex-wrap: wrap; justify-content: center;
-      min-height: 80px; align-items: flex-end;
-      padding: 8px; background: rgba(255,255,255,0.2);
-      border: 3px solid rgba(0,0,0,0.3); width: 100%;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: center;
+      min-height: 80px;
+      align-items: flex-end;
+      padding: 8px;
+      background: rgba(255, 255, 255, 0.2);
+      border: 3px solid rgba(0, 0, 0, 0.3);
+      width: 100%;
     }
 
     /* === ANIMATIONS === */
-    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-    @keyframes spin-fall {
-      0%   { transform: translateY(-30px) rotate(0deg) scale(0.8); opacity:0; }
-      10%  { opacity:1; }
-      100% { transform: translateY(110vh) rotate(720deg) scale(1.2); opacity:0; }
-    }
-    @keyframes float {
-      0%,100% { transform: translateY(0px); }
-      50%     { transform: translateY(-8px); }
-    }
-    @keyframes glow-pulse {
-      0%,100% { text-shadow: 0 0 10px #ffd700, 3px 3px 0 #000; }
-      50%     { text-shadow: 0 0 25px #ffd700, 0 0 50px #ff8c00, 3px 3px 0 #000; }
-    }
-    .blink { animation: blink 1s step-end infinite; }
-    .float { animation: float 2s ease-in-out infinite; }
-    .glow  { animation: glow-pulse 2s ease-in-out infinite; }
+    @keyframes blink {
 
-    .ketupat-rain { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
-    .k-drop { position: absolute; animation: spin-fall linear infinite; }
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: 0
+      }
+    }
+
+    @keyframes spin-fall {
+      0% {
+        transform: translateY(-30px) rotate(0deg) scale(0.8);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(110vh) rotate(720deg) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    @keyframes glow-pulse {
+
+      0%,
+      100% {
+        text-shadow: 0 0 10px #ffd700, 3px 3px 0 #000;
+      }
+
+      50% {
+        text-shadow: 0 0 25px #ffd700, 0 0 50px #ff8c00, 3px 3px 0 #000;
+      }
+    }
+
+    .blink {
+      animation: blink 1s step-end infinite;
+    }
+
+    .float {
+      animation: float 2s ease-in-out infinite;
+    }
+
+    .glow {
+      animation: glow-pulse 2s ease-in-out infinite;
+    }
+
+    .ketupat-rain {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .k-drop {
+      position: absolute;
+      animation: spin-fall linear infinite;
+    }
 
     /* === NIGHT MODE overrides for time slot screen === */
-    .bg-night .pixel-text  { color: #fff; text-shadow: 1px 1px 0 rgba(0,0,0,0.8); }
-    .bg-night .pixel-label { color: #fff; text-shadow: 1px 1px 0 rgba(0,0,0,0.8); }
-    .bg-night .divider     { background: repeating-linear-gradient(90deg,#fff 0,#fff 4px,transparent 4px,transparent 8px); }
-    .bg-night .time-card   { border-color: rgba(255,255,255,0.85); color: #1a1a1a; }
-    .bg-night .time-card.on { border-color: #ffd700; }
+    .bg-night .pixel-text {
+      color: #fff;
+      text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.8);
+    }
+
+    .bg-night .pixel-label {
+      color: #fff;
+      text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.8);
+    }
+
+    .bg-night .divider {
+      background: repeating-linear-gradient(90deg, #fff 0, #fff 4px, transparent 4px, transparent 8px);
+    }
+
+    .bg-night .time-card {
+      border-color: rgba(255, 255, 255, 0.85);
+      color: #1a1a1a;
+    }
+
+    .bg-night .time-card.on {
+      border-color: #ffd700;
+    }
 
     /* === NOTIFICATION === */
     #notif {
-      position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
-      background: #ffd700; color: #000;
-      font-family: 'Press Start 2P', monospace; font-size: 7px;
-      padding: 10px 14px; border: 4px solid #000; box-shadow: 4px 4px 0 #000;
-      z-index: 9999; display: none; text-align: center; max-width: 88%; line-height: 1.8;
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #ffd700;
+      color: #000;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 7px;
+      padding: 10px 14px;
+      border: 4px solid #000;
+      box-shadow: 4px 4px 0 #000;
+      z-index: 9999;
+      display: none;
+      text-align: center;
+      max-width: 88%;
+      line-height: 1.8;
     }
 
     /* === DRAGON HUD === */
     #dragon-hud {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 8px 12px; background: rgba(0,0,0,0.85);
-      width: 100%; flex-shrink: 0; z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 12px;
+      background: rgba(0, 0, 0, 0.85);
+      width: 100%;
+      flex-shrink: 0;
+      z-index: 2;
     }
-    #dragon-overlay {
-      position: absolute; inset: 0; display: none;
-      flex-direction: column; align-items: center; justify-content: center;
-      background: rgba(0,0,0,0.88); z-index: 10;
-    }
-    #dragon-result {
-      font-size: clamp(10px, 3vw, 14px); color: #ffd700;
-      text-align: center; text-shadow: 3px 3px 0 #000;
-      padding: 20px; white-space: pre-line; line-height: 2;
-    }
-    #dragon-btns { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 16px; }
 
-    canvas { image-rendering: pixelated; image-rendering: crisp-edges; }
+    #dragon-overlay {
+      position: absolute;
+      inset: 0;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.88);
+      z-index: 10;
+    }
+
+    #dragon-result {
+      font-size: clamp(10px, 3vw, 14px);
+      color: #ffd700;
+      text-align: center;
+      text-shadow: 3px 3px 0 #000;
+      padding: 20px;
+      white-space: pre-line;
+      line-height: 2;
+    }
+
+    #dragon-btns {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 16px;
+    }
+
+    canvas {
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+    }
 
     /* Screen 1 special */
     #s1-inner {
-      flex: 1; display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 14px; padding: 12px; position: relative; z-index: 1;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 12px;
+      position: relative;
+      z-index: 1;
       width: 100%;
     }
   </style>
 </head>
+
 <body>
-<div id="game">
-  <div id="notif"></div>
+  <div id="game">
+    <div id="notif"></div>
 
-  <!-- ====== SCREEN 1: TITLE ====== -->
-  <div id="s1" class="screen bg-day active">
-    <div class="ketupat-rain" id="krain"></div>
-    <div id="s1-inner">
-      <canvas id="title-canvas" style="max-width:96%; width:440px;"></canvas>
-      <div style="display:flex; gap:10px; align-items:center; justify-content:center; flex-wrap:wrap;">
-        <span style="font-size:22px; animation:float 1.8s ease-in-out infinite;">🏡</span>
-        <span style="font-size:22px; animation:float 2.2s ease-in-out infinite 0.3s;">🌙</span>
-        <span style="font-size:22px; animation:float 1.6s ease-in-out infinite 0.6s;">🪔</span>
-        <span style="font-size:22px; animation:float 2s ease-in-out infinite 0.9s;">🎋</span>
-        <span style="font-size:22px; animation:float 1.9s ease-in-out infinite 1.2s;">🏮</span>
+    <!-- ====== SCREEN 1: TITLE ====== -->
+    <div id="s1" class="screen bg-day active">
+      <div class="ketupat-rain" id="krain"></div>
+      <div id="s1-inner">
+        <canvas id="title-canvas" style="max-width:96%; width:440px;"></canvas>
+        <div style="display:flex; gap:10px; align-items:center; justify-content:center; flex-wrap:wrap;">
+          <span style="font-size:22px; animation:float 1.8s ease-in-out infinite;">🏡</span>
+          <span style="font-size:22px; animation:float 2.2s ease-in-out infinite 0.3s;">🌙</span>
+          <span style="font-size:22px; animation:float 1.6s ease-in-out infinite 0.6s;">🪔</span>
+          <span style="font-size:22px; animation:float 2s ease-in-out infinite 0.9s;">🎋</span>
+          <span style="font-size:22px; animation:float 1.9s ease-in-out infinite 1.2s;">🏮</span>
+        </div>
+        <div class="blink glow"
+          style="font-family:'Press Start 2P',monospace; font-size:11px; color:#ffd700; text-align:center; text-shadow:3px 3px 0 #000;">
+          ✨ PRESS START ✨
+        </div>
+        <div
+          style="font-family:'Press Start 2P',monospace; font-size:7px; color:#fffde7; text-shadow:1px 1px 0 #000; text-align:center; line-height:2;">
+          Raya 2026 &bull; Sabtu 11 April<br>Open House Arm &amp; Mida
+        </div>
+        <canvas id="title-sprites" width="200" height="60" style="max-width:90%;"></canvas>
       </div>
-      <div class="blink glow" style="font-family:'Press Start 2P',monospace; font-size:11px; color:#ffd700; text-align:center; text-shadow:3px 3px 0 #000;">
-        ✨ PRESS START ✨
-      </div>
-      <div style="font-family:'Press Start 2P',monospace; font-size:7px; color:#fffde7; text-shadow:1px 1px 0 #000; text-align:center; line-height:2;">
-        Raya 2026 &bull; Sabtu 11 April<br>Open House Arm &amp; Mida
-      </div>
-      <canvas id="title-sprites" width="200" height="60" style="max-width:90%;"></canvas>
     </div>
-  </div>
 
-  <!-- ====== SCREEN 2: CHARACTER CREATION ====== -->
-  <div id="s2" class="screen bg-day">
-    <div class="panel">
-      <div class="section-title">⚔️ CIPTA HERO KAU</div>
-      <div class="divider"></div>
-      <canvas id="char-canvas" width="96" height="96"
-        style="border:4px solid #000; background:#87ceeb; flex-shrink:0;"></canvas>
+    <!-- ====== SCREEN 2: CHARACTER CREATION ====== -->
+    <div id="s2" class="screen bg-day">
+      <div class="panel">
+        <div class="section-title">⚔️ CIPTA HERO KAU</div>
+        <div class="divider"></div>
+        <canvas id="char-canvas" width="96" height="96"
+          style="border:4px solid #000; background:#87ceeb; flex-shrink:0;"></canvas>
 
-      <!-- Name -->
-      <div style="width:100%;">
-        <label class="pixel-label">📜 Apa nama hero kau?</label>
-        <input id="inp-name" class="pixel-input" type="text" placeholder="Nama kau..." maxlength="20">
-      </div>
-
-      <!-- Gender -->
-      <div style="width:100%;">
-        <label class="pixel-label">⚔️ Jantina:</label>
-        <div class="toggle-row">
-          <button class="toggle on" id="t-male" onclick="setGender('male');SFX.click()">♂ Lelaki</button>
-          <button class="toggle" id="t-female" onclick="setGender('female');SFX.click()">♀ Perempuan</button>
-        </div>
-      </div>
-
-      <!-- Style A/B -->
-      <div style="width:100%;">
-        <label class="pixel-label">👘 Pilih gaya pakaian:</label>
-        <div class="toggle-row">
-          <button class="toggle on" id="t-styleA" onclick="setStyle('A');SFX.click()">🏰 Klasik</button>
-          <button class="toggle" id="t-styleB" onclick="setStyle('B');SFX.click()">✨ Moden</button>
-        </div>
-      </div>
-
-      <!-- Hijab -->
-      <div id="hijab-row" style="display:none; width:100%;">
-        <label class="checkbox-row">
-          <input type="checkbox" id="inp-hijab" onchange="setHijab(this.checked);SFX.click()">
-          <span>Pakai tudung?</span>
-        </label>
-      </div>
-
-      <!-- Attire colour -->
-      <div style="width:100%;">
-        <label class="pixel-label">🎨 Pilih warna:</label>
-        <div class="colour-row">
-          <button class="colour-opt on" id="c-matcha" onclick="setAttire('matcha');SFX.click()">
-            <div class="swatch" style="background:linear-gradient(#7daa6e 50%,#e8a0b4 50%);"></div>
-            Strawberry<br>Matcha
-          </button>
-          <button class="colour-opt" id="c-brown" onclick="setAttire('brown');SFX.click()">
-            <div class="swatch" style="background:linear-gradient(#6b3a2a 50%,#c8956a 50%);"></div>
-            Rich<br>Brown
-          </button>
-          <button class="colour-opt" id="c-blue" onclick="setAttire('blue');SFX.click()">
-            <div class="swatch" style="background:linear-gradient(#1a4a9a 50%,#4a90d9 50%);"></div>
-            Royal<br>Blue
-          </button>
-        </div>
-      </div>
-
-      <button class="btn btn-gold btn-full" onclick="toParty();SFX.confirm()">NEXT ▶</button>
-    </div>
-  </div>
-
-  <!-- ====== SCREEN 3: PARTY SIZE ====== -->
-  <div id="s3" class="screen bg-day">
-    <div class="panel">
-      <div class="section-title">👥 BAWA GENG?</div>
-      <div class="divider"></div>
-      <div id="party-sprites"></div>
-
-      <div style="width:100%;">
-        <label class="pixel-label">Kau datang sorang ke, bawak geng?</label>
-        <div class="toggle-row">
-          <button class="toggle on" id="t-solo" onclick="setPartyMode('solo');SFX.click()">🧍 Solo</button>
-          <button class="toggle" id="t-group" onclick="setPartyMode('group');SFX.click()">👨‍👩‍👧 Geng</button>
-        </div>
-      </div>
-
-      <div id="group-opts" style="display:none; width:100%; flex-direction:column; gap:8px;">
+        <!-- Name -->
         <div style="width:100%;">
-          <label class="pixel-label">Berapa orang lagi? (1–9)</label>
-          <div style="display:flex; align-items:center; gap:14px;">
-            <button class="btn btn-red" style="padding:8px 14px;" onclick="changeCount(-1);SFX.click()">–</button>
-            <span id="count-display" style="font-size:16px; min-width:24px; text-align:center; font-family:'Press Start 2P',monospace;">1</span>
-            <button class="btn btn-green" style="padding:8px 14px;" onclick="changeCount(1);SFX.click()">+</button>
+          <label class="pixel-label">📜 Apa nama hero kau?</label>
+          <input id="inp-name" class="pixel-input" type="text" placeholder="Nama kau..." maxlength="20">
+        </div>
+
+        <!-- Gender -->
+        <div style="width:100%;">
+          <label class="pixel-label">⚔️ Jantina:</label>
+          <div class="toggle-row">
+            <button class="toggle on" id="t-male" onclick="setGender('male');SFX.click()">♂ Lelaki</button>
+            <button class="toggle" id="t-female" onclick="setGender('female');SFX.click()">♀ Perempuan</button>
           </div>
         </div>
-        <div id="guest-entries" style="width:100%; display:flex; flex-direction:column; gap:8px;"></div>
-      </div>
 
-      <div style="display:flex; gap:8px; width:100%;">
-        <button class="btn btn-green" style="flex:1;" onclick="go('s2');SFX.nav()">◀ BACK</button>
-        <button class="btn btn-gold" style="flex:2;" onclick="toMap();SFX.confirm()">NEXT ▶</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ====== SCREEN 4: MAP REVEAL ====== -->
-  <div id="s4" class="screen bg-day">
-    <div class="panel" style="justify-content:center;">
-      <div class="section-title">🗺️ DESTINASI MISI!</div>
-      <div class="divider"></div>
-      <canvas id="map-canvas" width="280" height="190"
-        style="max-width:95%; border:6px solid #8b6914; box-shadow:4px 4px 0 #000;"></canvas>
-      <div style="background:rgba(0,0,0,0.6); padding:12px 14px; width:100%; border:3px solid #8b6914;">
-        <div style="font-family:'Press Start 2P',monospace; font-size:7px; color:#ffd700; text-align:center; line-height:2.2;">
-          📍 Rumah Arm &amp; Mida<br>
-          <span style="font-size:6px; color:#ccc;">7-13, Residensi Vista Agresif,<br>Jln Kg Sg Sekamat,<br>43000 Kajang, Selangor</span><br>
-          📅 Sabtu, 11 April 2026
+        <!-- Style A/B -->
+        <div style="width:100%;">
+          <label class="pixel-label">👘 Pilih gaya pakaian:</label>
+          <div class="toggle-row">
+            <button class="toggle on" id="t-styleA" onclick="setStyle('A');SFX.click()">🏰 Klasik</button>
+            <button class="toggle" id="t-styleB" onclick="setStyle('B');SFX.click()">✨ Moden</button>
+          </div>
         </div>
-      </div>
-      <div style="display:flex; gap:8px; width:100%;">
-        <button class="btn btn-blue" style="flex:1; font-size:7px; padding:10px 4px;" onclick="openNav('google');SFX.click()">🗺️ Google Maps</button>
-        <button class="btn btn-cyan" style="flex:1; font-size:7px; padding:10px 4px;" onclick="openNav('waze');SFX.click()">🚗 Waze</button>
-      </div>
-      <button class="btn btn-gold btn-full" onclick="go('s5');SFX.confirm()">Dah tahu jalan? Jom! ▶</button>
-    </div>
-  </div>
 
-  <!-- ====== SCREEN 5: TIME SLOT ====== -->
-  <div id="s5" class="screen bg-day">
-    <div class="panel" style="justify-content:center;">
-      <div class="section-title">⏰ PILIH MASA TIBA</div>
-      <div class="divider"></div>
-      <div class="pixel-text" style="text-align:center;">Bila hero kau nak sampai?</div>
-      <div class="time-grid">
-        <button class="time-card" id="tc-1pm" onclick="pickTime('1pm')">
-          ☀️<br>1:00 PM
-          <span class="flavour">Datang awal, dapat kuih panas! 🔥</span>
-        </button>
-        <button class="time-card" id="tc-3pm" onclick="pickTime('3pm')">
-          🌤️<br>3:00 PM
-          <span class="flavour">Tengah-tengah best, ramai orang!</span>
-        </button>
-        <button class="time-card" id="tc-5pm" onclick="pickTime('5pm')">
-          🌅<br>5:00 PM
-          <span class="flavour">Petang-petang, angin sepoi-sepoi 🌅</span>
-        </button>
-        <button class="time-card" id="tc-8pm" onclick="pickTime('8pm')">
-          🌙<br>8:00 PM
-          <span class="flavour">Night owl confirmed. Lampu cantik! ✨</span>
-        </button>
-      </div>
-      <div style="display:flex; gap:8px; width:100%;">
-        <button class="btn btn-green" style="flex:1;" onclick="go('s4');SFX.nav()">◀ BACK</button>
-        <button class="btn btn-gold" style="flex:2; opacity:0.5;" id="time-next" disabled onclick="toCutscene()">CONFIRM ▶</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ====== SCREEN 6: CUTSCENE ====== -->
-  <div id="s6" class="screen" style="padding:0; position:relative;">
-    <canvas id="cut-canvas" style="width:100%; height:100%; display:block;"></canvas>
-    <button class="btn btn-dark" style="position:absolute; top:14px; right:14px; font-size:7px; padding:8px 10px; z-index:5;" onclick="skipCut();SFX.nav()">SKIP ▶</button>
-  </div>
-
-  <!-- ====== SCREEN 7: RSVP CONFIRMATION ====== -->
-  <div id="s7" class="screen bg-day">
-    <div class="panel" style="justify-content:center;">
-      <div class="section-title" style="font-size:13px; color:#ffd700; text-shadow:3px 3px 0 #000;">🏆 QUEST COMPLETE!</div>
-
-      <div class="scroll-box">
-        <div style="text-align:center; margin-bottom:14px;">
-          <canvas id="conf-sprite" width="120" height="120"></canvas>
+        <!-- Hijab -->
+        <div id="hijab-row" style="display:none; width:100%;">
+          <label class="checkbox-row">
+            <input type="checkbox" id="inp-hijab" onchange="setHijab(this.checked);SFX.click()">
+            <span>Pakai tudung?</span>
+          </label>
         </div>
+
+        <!-- Attire colour -->
+        <div style="width:100%;">
+          <label class="pixel-label">🎨 Pilih warna:</label>
+          <div class="colour-row">
+            <button class="colour-opt on" id="c-matcha" onclick="setAttire('matcha');SFX.click()">
+              <div class="swatch" style="background:linear-gradient(#7daa6e 50%,#e8a0b4 50%);"></div>
+              Strawberry<br>Matcha
+            </button>
+            <button class="colour-opt" id="c-brown" onclick="setAttire('brown');SFX.click()">
+              <div class="swatch" style="background:linear-gradient(#6b3a2a 50%,#c8956a 50%);"></div>
+              Rich<br>Brown
+            </button>
+            <button class="colour-opt" id="c-blue" onclick="setAttire('blue');SFX.click()">
+              <div class="swatch" style="background:linear-gradient(#1a4a9a 50%,#4a90d9 50%);"></div>
+              Royal<br>Blue
+            </button>
+          </div>
+        </div>
+
+        <button class="btn btn-gold btn-full" onclick="toParty();SFX.confirm()">NEXT ▶</button>
+      </div>
+    </div>
+
+    <!-- ====== SCREEN 3: PARTY SIZE ====== -->
+    <div id="s3" class="screen bg-day">
+      <div class="panel">
+        <div class="section-title">👥 BAWA GENG?</div>
         <div class="divider"></div>
-        <div style="height:10px;"></div>
-        <div id="conf-details" style="font-family:'Press Start 2P',monospace; font-size:8px; line-height:2.8; color:#3d2b1f;"></div>
-        <div style="height:10px;"></div>
-        <div class="divider"></div>
-        <div style="height:10px;"></div>
-        <div style="font-size:7px; font-family:'Press Start 2P',monospace; text-align:center; color:#8b4513; line-height:2.2;">
-          Arm &amp; Mida tunggu kau tau! 🎉<br>Jangan lupa save tarikh!
+        <div id="party-sprites"></div>
+
+        <div style="width:100%;">
+          <label class="pixel-label">Kau datang sorang ke, bawak geng?</label>
+          <div class="toggle-row">
+            <button class="toggle on" id="t-solo" onclick="setPartyMode('solo');SFX.click()">🧍 Solo</button>
+            <button class="toggle" id="t-group" onclick="setPartyMode('group');SFX.click()">👨‍👩‍👧 Geng</button>
+          </div>
+        </div>
+
+        <div id="group-opts" style="display:none; width:100%; flex-direction:column; gap:8px;">
+          <div style="width:100%;">
+            <label class="pixel-label">Berapa orang lagi? (1–9)</label>
+            <div style="display:flex; align-items:center; gap:14px;">
+              <button class="btn btn-red" style="padding:8px 14px;" onclick="changeCount(-1);SFX.click()">–</button>
+              <span id="count-display"
+                style="font-size:16px; min-width:24px; text-align:center; font-family:'Press Start 2P',monospace;">1</span>
+              <button class="btn btn-green" style="padding:8px 14px;" onclick="changeCount(1);SFX.click()">+</button>
+            </div>
+          </div>
+          <div id="guest-entries" style="width:100%; display:flex; flex-direction:column; gap:8px;"></div>
+        </div>
+
+        <div style="display:flex; gap:8px; width:100%;">
+          <button class="btn btn-green" style="flex:1;" onclick="go('s2');SFX.nav()">◀ BACK</button>
+          <button class="btn btn-gold" style="flex:2;" onclick="toMap();SFX.confirm()">NEXT ▶</button>
         </div>
       </div>
+    </div>
 
-      <!-- Action buttons -->
-      <button class="btn btn-gold btn-full" onclick="addCal();SFX.click()">📅 SAVE KE CALENDAR</button>
-
-      <div style="display:flex; gap:8px; width:100%;">
-        <button class="btn btn-blue" style="flex:1; font-size:7px; padding:10px 4px;" onclick="openNav('google');SFX.click()">🗺️ Maps</button>
-        <button class="btn btn-cyan" style="flex:1; font-size:7px; padding:10px 4px;" onclick="openNav('waze');SFX.click()">🚗 Waze</button>
+    <!-- ====== SCREEN 4: MAP REVEAL ====== -->
+    <div id="s4" class="screen bg-day">
+      <div class="panel" style="justify-content:center;">
+        <div class="section-title">🗺️ DESTINASI MISI!</div>
+        <div class="divider"></div>
+        <canvas id="map-canvas" width="280" height="190"
+          style="max-width:95%; border:6px solid #8b6914; box-shadow:4px 4px 0 #000;"></canvas>
+        <div style="background:rgba(0,0,0,0.6); padding:12px 14px; width:100%; border:3px solid #8b6914;">
+          <div
+            style="font-family:'Press Start 2P',monospace; font-size:7px; color:#ffd700; text-align:center; line-height:2.2;">
+            📍 Rumah Arm &amp; Mida<br>
+            <span style="font-size:6px; color:#ccc;">7-13, Residensi Vista Agresif,<br>Jln Kg Sg Sekamat,<br>43000
+              Kajang, Selangor</span><br>
+            📅 Sabtu, 11 April 2026
+          </div>
+        </div>
+        <div style="display:flex; gap:8px; width:100%;">
+          <button class="btn btn-blue" style="flex:1; font-size:7px; padding:10px 4px;"
+            onclick="openNav('google');SFX.click()">🗺️ Google Maps</button>
+          <button class="btn btn-cyan" style="flex:1; font-size:7px; padding:10px 4px;"
+            onclick="openNav('waze');SFX.click()">🚗 Waze</button>
+        </div>
+        <button class="btn btn-gold btn-full" onclick="go('s5');SFX.confirm()">Dah tahu jalan? Jom! ▶</button>
       </div>
-
-      <div id="rsvp-msg" style="font-size:6px; font-family:'Press Start 2P',monospace; text-align:center; min-height:14px; color:#4a8f29;"></div>
-
-      <div class="divider"></div>
-
-      <!-- Side Quest (visible!) -->
-      <button class="btn btn-purple btn-full" onclick="enterDragon();SFX.select()" style="font-size:8px;">
-        ⚔️ SIDE QUEST: Lawan Naga!
-      </button>
-
-      <!-- Submit new RSVP -->
-      <button class="btn btn-green btn-full" onclick="submitNew();SFX.nav()" style="font-size:8px;">
-        🔄 Submit RSVP Baru
-      </button>
     </div>
-  </div>
 
-  <!-- ====== SCREEN 8: DRAGON MINI-GAME ====== -->
-  <div id="s8" class="screen bg-dark" style="flex-direction:column; padding:0; position:relative;">
-    <div id="dragon-hud">
-      <div id="hearts" style="font-size:16px;">❤️❤️❤️</div>
-      <div id="timer" style="font-family:'Press Start 2P',monospace; font-size:10px; color:#ffd700;">30</div>
-      <div style="font-family:'Press Start 2P',monospace; font-size:7px; color:#fff;">ELAK!</div>
+    <!-- ====== SCREEN 5: TIME SLOT ====== -->
+    <div id="s5" class="screen bg-day">
+      <div class="panel" style="justify-content:center;">
+        <div class="section-title">⏰ PILIH MASA TIBA</div>
+        <div class="divider"></div>
+        <div class="pixel-text" style="text-align:center;">Bila hero kau nak sampai?</div>
+        <div class="time-grid">
+          <button class="time-card" id="tc-1pm" onclick="pickTime('1pm')">
+            ☀️<br>1:00 PM
+            <span class="flavour">Datang awal, dapat kuih panas! 🔥</span>
+          </button>
+          <button class="time-card" id="tc-3pm" onclick="pickTime('3pm')">
+            🌤️<br>3:00 PM
+            <span class="flavour">Tengah-tengah best, ramai orang!</span>
+          </button>
+          <button class="time-card" id="tc-5pm" onclick="pickTime('5pm')">
+            🌅<br>5:00 PM
+            <span class="flavour">Petang-petang, angin sepoi-sepoi 🌅</span>
+          </button>
+          <button class="time-card" id="tc-8pm" onclick="pickTime('8pm')">
+            🌙<br>8:00 PM
+            <span class="flavour">Night owl confirmed. Lampu cantik! ✨</span>
+          </button>
+        </div>
+        <div style="display:flex; gap:8px; width:100%;">
+          <button class="btn btn-green" style="flex:1;" onclick="go('s4');SFX.nav()">◀ BACK</button>
+          <button class="btn btn-gold" style="flex:2; opacity:0.5;" id="time-next" disabled
+            onclick="toCutscene()">CONFIRM ▶</button>
+        </div>
+      </div>
     </div>
-    <canvas id="dragon-canvas" style="width:100%; flex:1; display:block;"></canvas>
-    <div id="dragon-overlay">
-      <div id="dragon-result"></div>
-      <div id="dragon-btns"></div>
+
+    <!-- ====== SCREEN 6: CUTSCENE ====== -->
+    <div id="s6" class="screen" style="padding:0; position:relative;">
+      <canvas id="cut-canvas" style="width:100%; height:100%; display:block;"></canvas>
+      <button class="btn btn-dark"
+        style="position:absolute; top:14px; right:14px; font-size:7px; padding:8px 10px; z-index:5;"
+        onclick="skipCut();SFX.nav()">SKIP ▶</button>
     </div>
-  </div>
 
-</div><!-- #game -->
+    <!-- ====== SCREEN 7: RSVP CONFIRMATION ====== -->
+    <div id="s7" class="screen bg-day">
+      <div class="panel" style="justify-content:center;">
+        <div class="section-title" style="font-size:13px; color:#ffd700; text-shadow:3px 3px 0 #000;">🏆 QUEST COMPLETE!
+        </div>
 
-<script>
-// ==================== STATE ====================
-const S = {
-  name: '',
-  gender: 'male',
-  style: 'A',
-  hijab: false,
-  attire: 'matcha',
-  partyMode: 'solo',
-  extras: 0,
-  guests: [],
-  slot: null
-};
+        <div class="scroll-box">
+          <div style="text-align:center; margin-bottom:14px;">
+            <canvas id="conf-sprite" width="120" height="120"></canvas>
+          </div>
+          <div class="divider"></div>
+          <div style="height:10px;"></div>
+          <div id="conf-details"
+            style="font-family:'Press Start 2P',monospace; font-size:8px; line-height:2.8; color:#3d2b1f;"></div>
+          <div style="height:10px;"></div>
+          <div class="divider"></div>
+          <div style="height:10px;"></div>
+          <div
+            style="font-size:7px; font-family:'Press Start 2P',monospace; text-align:center; color:#8b4513; line-height:2.2;">
+            Arm &amp; Mida tunggu kau tau! 🎉<br>Jangan lupa save tarikh!
+          </div>
+        </div>
 
-const SB_URL = 'YOUR_SUPABASE_URL';
-const SB_KEY = 'YOUR_SUPABASE_ANON_KEY';
+        <!-- Action buttons -->
+        <button class="btn btn-gold btn-full" onclick="addCal();SFX.click()">📅 SAVE KE CALENDAR</button>
 
-// ==================== SOUND SYSTEM (Chiptune) ====================
-let _actx = null;
-function getACtx() {
-  if (!_actx) _actx = new (window.AudioContext || window.webkitAudioContext)();
-  return _actx;
-}
-function playTone(freq, dur, type='square', vol=0.22, delay=0) {
-  try {
-    const ctx = getACtx();
-    if (ctx.state === 'suspended') ctx.resume();
-    const o = ctx.createOscillator(), g = ctx.createGain();
-    o.connect(g); g.connect(ctx.destination);
-    o.type = type;
-    o.frequency.setValueAtTime(freq, ctx.currentTime + delay);
-    g.gain.setValueAtTime(vol, ctx.currentTime + delay);
-    g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + delay + dur);
-    o.start(ctx.currentTime + delay);
-    o.stop(ctx.currentTime + delay + dur + 0.02);
-  } catch(e) {}
-}
+        <div style="display:flex; gap:8px; width:100%;">
+          <button class="btn btn-blue" style="flex:1; font-size:7px; padding:10px 4px;"
+            onclick="openNav('google');SFX.click()">🗺️ Maps</button>
+          <button class="btn btn-cyan" style="flex:1; font-size:7px; padding:10px 4px;"
+            onclick="openNav('waze');SFX.click()">🚗 Waze</button>
+        </div>
 
-const SFX = {
-  click:   () => playTone(440, 0.08, 'square', 0.18),
-  nav:     () => playTone(330, 0.09, 'square', 0.18),
-  select:  () => { playTone(392,0.07); playTone(523,0.1,'square',0.2,0.07); },
-  confirm: () => [392,523,659].forEach((f,i)=>playTone(f,0.1,'square',0.25,i*0.07)),
-  complete:() => [523,659,784,1047].forEach((f,i)=>playTone(f,0.2,'square',0.3,i*0.12)),
-  hit:     () => playTone(180,0.18,'sawtooth',0.3),
-  jump:    () => { playTone(330,0.05,'square',0.2); playTone(440,0.1,'square',0.2,0.05); },
-  victory: () => [523,659,784,659,784,1047].forEach((f,i)=>playTone(f,0.15,'square',0.3,i*0.12)),
-  intro:   () => [262,330,392,330,392,523].forEach((f,i)=>playTone(f,0.12,'square',0.2,i*0.1)),
-};
+        <div id="rsvp-msg"
+          style="font-size:6px; font-family:'Press Start 2P',monospace; text-align:center; min-height:14px; color:#4a8f29;">
+        </div>
 
-// ==================== COLOURS ====================
-const ATTIRE = {
-  matcha: { top:'#7daa6e', btm:'#e8a0b4', name:'Strawberry Matcha 🍵🍓' },
-  brown:  { top:'#6b3a2a', btm:'#c8956a', name:'Rich Brown 🤎' },
-  blue:   { top:'#1a4a9a', btm:'#4a90d9', name:'Royal Blue 💙' }
-};
+        <div class="divider"></div>
 
-const SKIN='#c8825a', EYE='#111', SONGKOK='#1a1a1a',
-      HAIR='#2d1b00', WHITE='#f0ede0', DARK='#3d2b1f';
+        <!-- Side Quest (visible!) -->
+        <button class="btn btn-purple btn-full" onclick="enterDragon();SFX.select()" style="font-size:8px;">
+          ⚔️ SIDE QUEST: Lawan Naga!
+        </button>
 
-// ==================== SPRITES (16×24 pixel grid) ====================
-// 0=transparent 1=skin 2=attire-top 3=attire-btm 4=songkok 5=hair 6=white 7=dark 8=eye
+        <!-- Submit new RSVP -->
+        <button class="btn btn-green btn-full" onclick="submitNew();SFX.nav()" style="font-size:8px;">
+          🔄 Submit RSVP Baru
+        </button>
+      </div>
+    </div>
 
-// --- Male Style A: Classic Baju Melayu + Songkok ---
-const SP_MALE_A = [
-  [0,0,0,0,0,4,4,4,4,4,4,0,0,0,0,0],
-  [0,0,0,0,4,4,4,4,4,4,4,4,0,0,0,0],
-  [0,0,0,0,4,4,4,4,4,4,4,4,0,0,0,0],
-  [0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0],
-  [0,0,0,1,1,8,1,1,1,1,8,1,1,0,0,0],
-  [0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0],
-  [0,0,0,0,1,1,8,1,1,8,1,1,0,0,0,0],
-  [0,0,0,0,6,6,6,6,6,6,6,6,0,0,0,0],
-  [0,0,0,2,2,2,2,2,2,2,2,2,2,0,0,0],
-  [0,0,2,2,2,2,2,2,2,2,2,2,2,2,0,0],
-  [0,0,2,2,2,2,2,2,2,2,2,2,2,2,0,0],
-  [0,0,2,2,2,2,2,2,2,2,2,2,2,2,0,0],
-  [0,0,2,2,2,2,2,2,2,2,2,2,2,2,0,0],
-  [0,0,0,2,2,2,2,2,2,2,2,2,2,0,0,0],
-  [0,0,0,3,3,3,3,3,3,3,3,3,3,0,0,0],
-  [0,0,0,3,3,3,3,3,3,3,3,3,3,0,0,0],
-  [0,0,0,3,3,3,3,3,3,3,3,3,3,0,0,0],
-  [0,0,0,3,3,3,3,3,3,3,3,3,3,0,0,0],
-  [0,0,0,0,7,7,0,0,0,0,7,7,0,0,0,0],
-  [0,0,0,0,7,7,0,0,0,0,7,7,0,0,0,0],
-  [0,0,0,0,7,7,0,0,0,0,7,7,0,0,0,0],
-  [0,0,0,0,7,7,0,0,0,0,7,7,0,0,0,0],
-  [0,0,0,7,7,7,0,0,0,0,7,7,7,0,0,0],
-  [0,0,0,7,7,7,0,0,0,0,7,7,7,0,0,0],
-];
+    <!-- ====== SCREEN 8: DRAGON MINI-GAME ====== -->
+    <div id="s8" class="screen bg-dark" style="flex-direction:column; padding:0; position:relative;">
+      <div id="dragon-hud">
+        <div id="hearts" style="font-size:16px;">❤️❤️❤️</div>
+        <div id="timer" style="font-family:'Press Start 2P',monospace; font-size:10px; color:#ffd700;">30</div>
+        <div style="font-family:'Press Start 2P',monospace; font-size:7px; color:#fff;">ELAK!</div>
+      </div>
+      <canvas id="dragon-canvas" style="width:100%; flex:1; display:block;"></canvas>
+      <div id="dragon-overlay">
+        <div id="dragon-result"></div>
+        <div id="dragon-btns"></div>
+      </div>
+    </div>
 
-// --- Male Style B: Modern, hair visible ---
-const SP_MALE_B = [
-  [0,0,0,0,5,5,5,5,5,5,5,5,0,0,0,0],
-  [0,0,0,5,5,5,5,5,5,5,5,5,5,0,0,0],
-  [0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0],
-  [0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0],
-  [0,0,0,1,1,8,1,1,1,1,8,1,1,0,0,0],
-  [0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0],
-  [0,0,0,0,1,1,8,1,1,8,1,1,0,0,0,0],
-  [0,0,0,0,1,6,6,6,6,6,6,1,0,0,0,0],
-  [0,0,0,2,2,2,2,2,2,2,2,2,2,0,0,0],
-  [0,0,2,2,2,2,2,2,2,2,2,2,2,2,0,0],
-  [0,0,2,2,6,2,2,2,2,2,2,6,2,2,0,0],
-  [0,0,2,2,2,2,2,2,2,2,2,2,2,2,0,0],
-  [0,0,2,2,2,2,2,2,2,2,2,2,2,2,0,0],
-  [0,0,0,2,2,2,2,2,2,2,2,2,2,0,0,0],
-  [0,0,0,3,3,3,3,3,3,3,3,3,3,0,0,0],
-  [0,0,0,3,3,3,3,3,3,3,3,3,3,0,0,0],
-  [0,0,0,3,3,3,3,3,3,3,3,3,3,0,0,0],
-  [0,0,0,3,3,3,3,3,3,3,3,3,3,0,0,0],
-  [0,0,0,0,7,7,0,0,0,0,7,7,0,0,0,0],
-  [0,0,0,0,7,7,0,0,0,0,7,7,0,0,0,0],
-  [0,0,0,0,7,7,0,0,0,0,7,7,0,0,0,0],
-  [0,0,0,0,7,7,0,0,0,0,7,7,0,0,0,0],
-  [0,0,0,7,7,7,0,0,0,0,7,7,7,0,0,0],
-  [0,0,0,7,7,7,0,0,0,0,7,7,7,0,0,0],
-];
+  </div><!-- #game -->
 
-// --- Female Style A: Baju Kurung (FIXED face — no beard!) ---
-const SP_FEMALE_A = [
-  [0,0,0,0,5,5,5,5,5,5,5,5,0,0,0,0],
-  [0,0,0,5,5,5,5,5,5,5,5,5,5,0,0,0],
-  [0,0,0,5,5,1,1,1,1,1,1,5,5,0,0,0],
-  [0,0,0,0,5,1,1,1,1,1,1,5,0,0,0,0],
-  [0,0,0,0,1,8,1,1,1,1,8,1,0,0,0,0],
-  [0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0],
-  [0,0,0,0,1,1,1,8,8,1,1,1,0,0,0,0],
-  [0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0],
-  [0,0,0,2,2,2,2,2,2,2,2,2,2,0,0,0],
-  [0,0,2,2,2,2,2,2,2,2,2,2,2,2,0,0],
-  [0,0,2,2,2,2,2,2,2,2,2,2,2,2,0,0],
-  [0,0,2,2,2,2,2,2,2,2,2,2,2,2,0,0],
-  [0,0,0,3,3,3,3,3,3,3,3,3,3,0,0,0],
-  [0,0,3,3,3,3,3,3,3,3,3,3,3,3,0,0],
-  [0,0,3,3,3,3,3,3,3,3,3,3,3,3,0,0],
-  [0,0,3,3,3,3,3,3,3,3,3,3,3,3,0,0],
-  [0,0,3,3,3,3,3,3,3,3,3,3,3,3,0,0],
-  [0,0,0,3,3,3,3,3,3,3,3,3,3,0,0,0],
-  [0,0,0,3,3,3,3,3,3,3,3,3,3,0,0,0],
-  [0,0,0,3,3,3,3,3,3,3,3,3,3,0,0,0],
-  [0,0,0,0,7,7,0,0,0,0,7,7,0,0,0,0],
-  [0,0,0,0,7,7,0,0,0,0,7,7,0,0,0,0],
-  [0,0,0,0,7,7,0,0,0,0,7,7,0,0,0,0],
-  [0,0,0,0,7,7,0,0,0,0,7,7,0,0,0,0],
-];
+  <script>
+    // ==================== STATE ====================
+    const S = {
+      name: '',
+      gender: 'male',
+      style: 'A',
+      hijab: false,
+      attire: 'matcha',
+      partyMode: 'solo',
+      extras: 0,
+      guests: [],
+      slot: null
+    };
 
-// --- Female Style B: Kebaya fitted (same face, different body) ---
-const SP_FEMALE_B = [
-  [0,0,0,0,5,5,5,5,5,5,5,5,0,0,0,0],
-  [0,0,0,5,5,5,5,5,5,5,5,5,5,0,0,0],
-  [0,0,0,5,5,1,1,1,1,1,1,5,5,0,0,0],
-  [0,0,0,0,5,1,1,1,1,1,1,5,0,0,0,0],
-  [0,0,0,0,1,8,1,1,1,1,8,1,0,0,0,0],
-  [0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0],
-  [0,0,0,0,1,1,1,8,8,1,1,1,0,0,0,0],
-  [0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0],
-  [0,0,0,0,2,2,6,2,2,6,2,2,0,0,0,0],
-  [0,0,0,2,2,2,2,2,2,2,2,2,2,0,0,0],
-  [0,0,0,2,2,2,2,2,2,2,2,2,2,0,0,0],
-  [0,0,0,2,2,6,2,2,2,2,6,2,2,0,0,0],
-  [0,0,0,2,2,2,2,2,2,2,2,2,2,0,0,0],
-  [0,0,0,3,3,3,3,3,3,3,3,3,3,0,0,0],
-  [0,0,0,3,3,3,3,3,3,3,3,3,3,0,0,0],
-  [0,0,0,3,3,3,3,3,3,3,3,3,3,0,0,0],
-  [0,0,0,3,3,3,3,3,3,3,3,3,3,0,0,0],
-  [0,0,0,3,3,3,3,3,3,3,3,3,3,0,0,0],
-  [0,0,0,3,3,3,3,3,3,3,3,3,3,0,0,0],
-  [0,0,0,3,3,3,3,3,3,3,3,3,3,0,0,0],
-  [0,0,0,0,7,7,0,0,0,0,7,7,0,0,0,0],
-  [0,0,0,0,7,7,0,0,0,0,7,7,0,0,0,0],
-  [0,0,0,0,7,7,0,0,0,0,7,7,0,0,0,0],
-  [0,0,0,0,7,7,0,0,0,0,7,7,0,0,0,0],
-];
+    const SB_URL = 'https://euebcmtbrnmyvqvwidpd.supabase.co';
+    const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV1ZWJjbXRicm5teXZxdndpZHBkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU2MzU0MDEsImV4cCI6MjA5MTIxMTQwMX0.rJLv8rBsXqX1YZf-I_3RcXa29r-1GQBiKffIHIBHJXk';
 
-// --- Hijab Style A: Baju Kurung + tudung ---
-const SP_HIJAB_A = [
-  [0,0,0,2,2,2,2,2,2,2,2,2,2,0,0,0],
-  [0,0,2,2,2,2,2,2,2,2,2,2,2,2,0,0],
-  [0,0,2,2,1,1,1,1,1,1,1,1,2,2,0,0],
-  [0,0,2,1,1,1,1,1,1,1,1,1,1,2,0,0],
-  [0,0,2,1,1,8,1,1,1,1,8,1,1,2,0,0],
-  [0,0,2,1,1,1,1,1,1,1,1,1,1,2,0,0],
-  [0,0,2,1,1,1,1,8,8,1,1,1,1,2,0,0],
-  [0,0,2,2,2,2,2,2,2,2,2,2,2,2,0,0],
-  [0,0,0,2,2,2,2,2,2,2,2,2,2,0,0,0],
-  [0,0,2,2,2,2,2,2,2,2,2,2,2,2,0,0],
-  [0,0,2,2,2,2,2,2,2,2,2,2,2,2,0,0],
-  [0,0,2,2,2,2,2,2,2,2,2,2,2,2,0,0],
-  [0,0,0,3,3,3,3,3,3,3,3,3,3,0,0,0],
-  [0,0,3,3,3,3,3,3,3,3,3,3,3,3,0,0],
-  [0,0,3,3,3,3,3,3,3,3,3,3,3,3,0,0],
-  [0,0,3,3,3,3,3,3,3,3,3,3,3,3,0,0],
-  [0,0,3,3,3,3,3,3,3,3,3,3,3,3,0,0],
-  [0,0,0,3,3,3,3,3,3,3,3,3,3,0,0,0],
-  [0,0,0,3,3,3,3,3,3,3,3,3,3,0,0,0],
-  [0,0,0,3,3,3,3,3,3,3,3,3,3,0,0,0],
-  [0,0,0,0,7,7,0,0,0,0,7,7,0,0,0,0],
-  [0,0,0,0,7,7,0,0,0,0,7,7,0,0,0,0],
-  [0,0,0,0,7,7,0,0,0,0,7,7,0,0,0,0],
-  [0,0,0,0,7,7,0,0,0,0,7,7,0,0,0,0],
-];
+    // ==================== SOUND SYSTEM (Chiptune) ====================
+    let _actx = null;
+    function getACtx() {
+      if (!_actx) _actx = new (window.AudioContext || window.webkitAudioContext)();
+      return _actx;
+    }
+    function playTone(freq, dur, type = 'square', vol = 0.22, delay = 0) {
+      try {
+        const ctx = getACtx();
+        if (ctx.state === 'suspended') ctx.resume();
+        const o = ctx.createOscillator(), g = ctx.createGain();
+        o.connect(g); g.connect(ctx.destination);
+        o.type = type;
+        o.frequency.setValueAtTime(freq, ctx.currentTime + delay);
+        g.gain.setValueAtTime(vol, ctx.currentTime + delay);
+        g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + delay + dur);
+        o.start(ctx.currentTime + delay);
+        o.stop(ctx.currentTime + delay + dur + 0.02);
+      } catch (e) { }
+    }
 
-// --- Hijab Style B: Kebaya + tudung ---
-const SP_HIJAB_B = [
-  [0,0,0,2,2,2,2,2,2,2,2,2,2,0,0,0],
-  [0,0,2,2,2,2,2,2,2,2,2,2,2,2,0,0],
-  [0,0,2,2,1,1,1,1,1,1,1,1,2,2,0,0],
-  [0,0,2,1,1,1,1,1,1,1,1,1,1,2,0,0],
-  [0,0,2,1,1,8,1,1,1,1,8,1,1,2,0,0],
-  [0,0,2,1,1,1,1,1,1,1,1,1,1,2,0,0],
-  [0,0,2,1,1,1,1,8,8,1,1,1,1,2,0,0],
-  [0,0,2,2,2,2,2,2,2,2,2,2,2,2,0,0],
-  [0,0,0,0,2,2,6,2,2,6,2,2,0,0,0,0],
-  [0,0,0,2,2,2,2,2,2,2,2,2,2,0,0,0],
-  [0,0,0,2,2,2,2,2,2,2,2,2,2,0,0,0],
-  [0,0,0,2,2,6,2,2,2,2,6,2,2,0,0,0],
-  [0,0,0,2,2,2,2,2,2,2,2,2,2,0,0,0],
-  [0,0,0,3,3,3,3,3,3,3,3,3,3,0,0,0],
-  [0,0,0,3,3,3,3,3,3,3,3,3,3,0,0,0],
-  [0,0,0,3,3,3,3,3,3,3,3,3,3,0,0,0],
-  [0,0,0,3,3,3,3,3,3,3,3,3,3,0,0,0],
-  [0,0,0,3,3,3,3,3,3,3,3,3,3,0,0,0],
-  [0,0,0,3,3,3,3,3,3,3,3,3,3,0,0,0],
-  [0,0,0,3,3,3,3,3,3,3,3,3,3,0,0,0],
-  [0,0,0,0,7,7,0,0,0,0,7,7,0,0,0,0],
-  [0,0,0,0,7,7,0,0,0,0,7,7,0,0,0,0],
-  [0,0,0,0,7,7,0,0,0,0,7,7,0,0,0,0],
-  [0,0,0,0,7,7,0,0,0,0,7,7,0,0,0,0],
-];
+    const SFX = {
+      click: () => playTone(440, 0.08, 'square', 0.18),
+      nav: () => playTone(330, 0.09, 'square', 0.18),
+      select: () => { playTone(392, 0.07); playTone(523, 0.1, 'square', 0.2, 0.07); },
+      confirm: () => [392, 523, 659].forEach((f, i) => playTone(f, 0.1, 'square', 0.25, i * 0.07)),
+      complete: () => [523, 659, 784, 1047].forEach((f, i) => playTone(f, 0.2, 'square', 0.3, i * 0.12)),
+      hit: () => playTone(180, 0.18, 'sawtooth', 0.3),
+      jump: () => { playTone(330, 0.05, 'square', 0.2); playTone(440, 0.1, 'square', 0.2, 0.05); },
+      victory: () => [523, 659, 784, 659, 784, 1047].forEach((f, i) => playTone(f, 0.15, 'square', 0.3, i * 0.12)),
+      intro: () => [262, 330, 392, 330, 392, 523].forEach((f, i) => playTone(f, 0.12, 'square', 0.2, i * 0.1)),
+    };
 
-function getSprite() {
-  if (S.gender === 'male') return S.style === 'A' ? SP_MALE_A : SP_MALE_B;
-  if (S.hijab) return S.style === 'A' ? SP_HIJAB_A : SP_HIJAB_B;
-  return S.style === 'A' ? SP_FEMALE_A : SP_FEMALE_B;
-}
+    // ==================== COLOURS ====================
+    const ATTIRE = {
+      matcha: { top: '#7daa6e', btm: '#e8a0b4', name: 'Strawberry Matcha 🍵🍓' },
+      brown: { top: '#6b3a2a', btm: '#c8956a', name: 'Rich Brown 🤎' },
+      blue: { top: '#1a4a9a', btm: '#4a90d9', name: 'Royal Blue 💙' }
+    };
 
-function getGuestSprite(gender, style) {
-  if (gender === 'male') return style === 'A' ? SP_MALE_A : SP_MALE_B;
-  return style === 'A' ? SP_FEMALE_A : SP_FEMALE_B;
-}
+    const SKIN = '#c8825a', EYE = '#111', SONGKOK = '#1a1a1a',
+      HAIR = '#2d1b00', WHITE = '#f0ede0', DARK = '#3d2b1f';
 
-function colorMap(attire) {
-  const a = ATTIRE[attire] || ATTIRE.matcha;
-  return { 1:SKIN, 2:a.top, 3:a.btm, 4:SONGKOK, 5:HAIR, 6:WHITE, 7:DARK, 8:EYE };
-}
+    // ==================== SPRITES (16×24 pixel grid) ====================
+    // 0=transparent 1=skin 2=attire-top 3=attire-btm 4=songkok 5=hair 6=white 7=dark 8=eye
 
-function drawSprite(ctx, data, cm, x, y, scale) {
-  data.forEach((row, sy) => {
-    row.forEach((ci, sx) => {
-      if (!ci) return;
-      ctx.fillStyle = cm[ci] || 'transparent';
-      ctx.fillRect(Math.floor(x+sx*scale), Math.floor(y+sy*scale), Math.ceil(scale), Math.ceil(scale));
-    });
-  });
-}
+    // --- Male Style A: Classic Baju Melayu + Songkok ---
+    const SP_MALE_A = [
+      [0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0],
+      [0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0],
+      [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
+      [0, 0, 0, 1, 1, 8, 1, 1, 1, 1, 8, 1, 1, 0, 0, 0],
+      [0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0],
+      [0, 0, 0, 0, 1, 1, 8, 1, 1, 8, 1, 1, 0, 0, 0, 0],
+      [0, 0, 0, 0, 6, 6, 6, 6, 6, 6, 6, 6, 0, 0, 0, 0],
+      [0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0],
+      [0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0],
+      [0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0],
+      [0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0],
+      [0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0],
+      [0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0],
+      [0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0],
+      [0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0],
+      [0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0],
+      [0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0],
+      [0, 0, 0, 0, 7, 7, 0, 0, 0, 0, 7, 7, 0, 0, 0, 0],
+      [0, 0, 0, 0, 7, 7, 0, 0, 0, 0, 7, 7, 0, 0, 0, 0],
+      [0, 0, 0, 0, 7, 7, 0, 0, 0, 0, 7, 7, 0, 0, 0, 0],
+      [0, 0, 0, 0, 7, 7, 0, 0, 0, 0, 7, 7, 0, 0, 0, 0],
+      [0, 0, 0, 7, 7, 7, 0, 0, 0, 0, 7, 7, 7, 0, 0, 0],
+      [0, 0, 0, 7, 7, 7, 0, 0, 0, 0, 7, 7, 7, 0, 0, 0],
+    ];
 
-// ==================== SCREEN NAV ====================
-function go(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
+    // --- Male Style B: Modern, hair visible ---
+    const SP_MALE_B = [
+      [0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0],
+      [0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0],
+      [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
+      [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
+      [0, 0, 0, 1, 1, 8, 1, 1, 1, 1, 8, 1, 1, 0, 0, 0],
+      [0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0],
+      [0, 0, 0, 0, 1, 1, 8, 1, 1, 8, 1, 1, 0, 0, 0, 0],
+      [0, 0, 0, 0, 1, 6, 6, 6, 6, 6, 6, 1, 0, 0, 0, 0],
+      [0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0],
+      [0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0],
+      [0, 0, 2, 2, 6, 2, 2, 2, 2, 2, 2, 6, 2, 2, 0, 0],
+      [0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0],
+      [0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0],
+      [0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0],
+      [0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0],
+      [0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0],
+      [0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0],
+      [0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0],
+      [0, 0, 0, 0, 7, 7, 0, 0, 0, 0, 7, 7, 0, 0, 0, 0],
+      [0, 0, 0, 0, 7, 7, 0, 0, 0, 0, 7, 7, 0, 0, 0, 0],
+      [0, 0, 0, 0, 7, 7, 0, 0, 0, 0, 7, 7, 0, 0, 0, 0],
+      [0, 0, 0, 0, 7, 7, 0, 0, 0, 0, 7, 7, 0, 0, 0, 0],
+      [0, 0, 0, 7, 7, 7, 0, 0, 0, 0, 7, 7, 7, 0, 0, 0],
+      [0, 0, 0, 7, 7, 7, 0, 0, 0, 0, 7, 7, 7, 0, 0, 0],
+    ];
 
-// ==================== SCREEN 1: TITLE ====================
-function initTitle() {
-  const c = document.getElementById('title-canvas');
-  const W = 440, H = 160;
-  c.width = W; c.height = H;
-  const ctx = c.getContext('2d');
+    // --- Female Style A: Baju Kurung (FIXED face — no beard!) ---
+    const SP_FEMALE_A = [
+      [0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0],
+      [0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0],
+      [0, 0, 0, 5, 5, 1, 1, 1, 1, 1, 1, 5, 5, 0, 0, 0],
+      [0, 0, 0, 0, 5, 1, 1, 1, 1, 1, 1, 5, 0, 0, 0, 0],
+      [0, 0, 0, 0, 1, 8, 1, 1, 1, 1, 8, 1, 0, 0, 0, 0],
+      [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
+      [0, 0, 0, 0, 1, 1, 1, 8, 8, 1, 1, 1, 0, 0, 0, 0],
+      [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
+      [0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0],
+      [0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0],
+      [0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0],
+      [0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0],
+      [0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0],
+      [0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0],
+      [0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0],
+      [0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0],
+      [0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0],
+      [0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0],
+      [0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0],
+      [0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0],
+      [0, 0, 0, 0, 7, 7, 0, 0, 0, 0, 7, 7, 0, 0, 0, 0],
+      [0, 0, 0, 0, 7, 7, 0, 0, 0, 0, 7, 7, 0, 0, 0, 0],
+      [0, 0, 0, 0, 7, 7, 0, 0, 0, 0, 7, 7, 0, 0, 0, 0],
+      [0, 0, 0, 0, 7, 7, 0, 0, 0, 0, 7, 7, 0, 0, 0, 0],
+    ];
 
-  // Outer border
-  ctx.fillStyle = '#ffd700'; ctx.fillRect(0,0,W,H);
-  ctx.fillStyle = '#000'; ctx.fillRect(4,4,W-8,H-8);
-  ctx.fillStyle = '#1a0a4e'; ctx.fillRect(8,8,W-16,H-16);
+    // --- Female Style B: Kebaya fitted (same face, different body) ---
+    const SP_FEMALE_B = [
+      [0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0],
+      [0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0],
+      [0, 0, 0, 5, 5, 1, 1, 1, 1, 1, 1, 5, 5, 0, 0, 0],
+      [0, 0, 0, 0, 5, 1, 1, 1, 1, 1, 1, 5, 0, 0, 0, 0],
+      [0, 0, 0, 0, 1, 8, 1, 1, 1, 1, 8, 1, 0, 0, 0, 0],
+      [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
+      [0, 0, 0, 0, 1, 1, 1, 8, 8, 1, 1, 1, 0, 0, 0, 0],
+      [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
+      [0, 0, 0, 0, 2, 2, 6, 2, 2, 6, 2, 2, 0, 0, 0, 0],
+      [0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0],
+      [0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0],
+      [0, 0, 0, 2, 2, 6, 2, 2, 2, 2, 6, 2, 2, 0, 0, 0],
+      [0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0],
+      [0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0],
+      [0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0],
+      [0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0],
+      [0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0],
+      [0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0],
+      [0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0],
+      [0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0],
+      [0, 0, 0, 0, 7, 7, 0, 0, 0, 0, 7, 7, 0, 0, 0, 0],
+      [0, 0, 0, 0, 7, 7, 0, 0, 0, 0, 7, 7, 0, 0, 0, 0],
+      [0, 0, 0, 0, 7, 7, 0, 0, 0, 0, 7, 7, 0, 0, 0, 0],
+      [0, 0, 0, 0, 7, 7, 0, 0, 0, 0, 7, 7, 0, 0, 0, 0],
+    ];
 
-  // Corner stars
-  [[16,16],[W-20,16],[16,H-20],[W-20,H-20]].forEach(([x,y])=>{
-    ctx.fillStyle='#ffd700'; ctx.fillRect(x-4,y,9,3); ctx.fillRect(x,y-4,3,9);
-  });
+    // --- Hijab Style A: Baju Kurung + tudung ---
+    const SP_HIJAB_A = [
+      [0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0],
+      [0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0],
+      [0, 0, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 0, 0],
+      [0, 0, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0],
+      [0, 0, 2, 1, 1, 8, 1, 1, 1, 1, 8, 1, 1, 2, 0, 0],
+      [0, 0, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0],
+      [0, 0, 2, 1, 1, 1, 1, 8, 8, 1, 1, 1, 1, 2, 0, 0],
+      [0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0],
+      [0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0],
+      [0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0],
+      [0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0],
+      [0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0],
+      [0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0],
+      [0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0],
+      [0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0],
+      [0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0],
+      [0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0],
+      [0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0],
+      [0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0],
+      [0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0],
+      [0, 0, 0, 0, 7, 7, 0, 0, 0, 0, 7, 7, 0, 0, 0, 0],
+      [0, 0, 0, 0, 7, 7, 0, 0, 0, 0, 7, 7, 0, 0, 0, 0],
+      [0, 0, 0, 0, 7, 7, 0, 0, 0, 0, 7, 7, 0, 0, 0, 0],
+      [0, 0, 0, 0, 7, 7, 0, 0, 0, 0, 7, 7, 0, 0, 0, 0],
+    ];
 
-  // Title lines
-  ctx.textAlign = 'center';
-  ctx.shadowColor = '#ffd700'; ctx.shadowBlur = 15;
-  ctx.fillStyle = '#ffd700';
-  ctx.font = 'bold 15px "Press Start 2P",monospace';
-  ctx.fillText('OPEN HOUSE QUEST', W/2, 46);
-  ctx.shadowBlur = 0;
+    // --- Hijab Style B: Kebaya + tudung ---
+    const SP_HIJAB_B = [
+      [0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0],
+      [0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0],
+      [0, 0, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 0, 0],
+      [0, 0, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0],
+      [0, 0, 2, 1, 1, 8, 1, 1, 1, 1, 8, 1, 1, 2, 0, 0],
+      [0, 0, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0],
+      [0, 0, 2, 1, 1, 1, 1, 8, 8, 1, 1, 1, 1, 2, 0, 0],
+      [0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0],
+      [0, 0, 0, 0, 2, 2, 6, 2, 2, 6, 2, 2, 0, 0, 0, 0],
+      [0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0],
+      [0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0],
+      [0, 0, 0, 2, 2, 6, 2, 2, 2, 2, 6, 2, 2, 0, 0, 0],
+      [0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0],
+      [0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0],
+      [0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0],
+      [0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0],
+      [0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0],
+      [0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0],
+      [0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0],
+      [0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0],
+      [0, 0, 0, 0, 7, 7, 0, 0, 0, 0, 7, 7, 0, 0, 0, 0],
+      [0, 0, 0, 0, 7, 7, 0, 0, 0, 0, 7, 7, 0, 0, 0, 0],
+      [0, 0, 0, 0, 7, 7, 0, 0, 0, 0, 7, 7, 0, 0, 0, 0],
+      [0, 0, 0, 0, 7, 7, 0, 0, 0, 0, 7, 7, 0, 0, 0, 0],
+    ];
 
-  ctx.fillStyle = '#e8a0b4';
-  ctx.font = '11px "Press Start 2P",monospace';
-  ctx.fillText('Final Fantasy', W/2, 74);
+    function getSprite() {
+      if (S.gender === 'male') return S.style === 'A' ? SP_MALE_A : SP_MALE_B;
+      if (S.hijab) return S.style === 'A' ? SP_HIJAB_A : SP_HIJAB_B;
+      return S.style === 'A' ? SP_FEMALE_A : SP_FEMALE_B;
+    }
 
-  ctx.fillStyle = '#7daa6e';
-  ctx.font = '11px "Press Start 2P",monospace';
-  ctx.fillText('Ketupat  🍡', W/2, 100);
+    function getGuestSprite(gender, style) {
+      if (gender === 'male') return style === 'A' ? SP_MALE_A : SP_MALE_B;
+      return style === 'A' ? SP_FEMALE_A : SP_FEMALE_B;
+    }
 
-  ctx.fillStyle = 'rgba(255,215,0,0.5)';
-  ctx.font = '7px "Press Start 2P",monospace';
-  ctx.fillText('Raya 2026 • 11 April • Arm & Mida', W/2, 130);
+    function colorMap(attire) {
+      const a = ATTIRE[attire] || ATTIRE.matcha;
+      return { 1: SKIN, 2: a.top, 3: a.btm, 4: SONGKOK, 5: HAIR, 6: WHITE, 7: DARK, 8: EYE };
+    }
 
-  // Pixel decorations
-  [30,60,90,360,390,420].forEach(x=>{
-    ctx.fillStyle='#ffd700'; ctx.fillRect(x,H-24,4,4); ctx.fillRect(x,20,4,4);
-  });
+    function drawSprite(ctx, data, cm, x, y, scale) {
+      data.forEach((row, sy) => {
+        row.forEach((ci, sx) => {
+          if (!ci) return;
+          ctx.fillStyle = cm[ci] || 'transparent';
+          ctx.fillRect(Math.floor(x + sx * scale), Math.floor(y + sy * scale), Math.ceil(scale), Math.ceil(scale));
+        });
+      });
+    }
 
-  // Title sprites (little characters on screen 1)
-  const sc = document.getElementById('title-sprites');
-  const sctx = sc.getContext('2d');
-  sctx.clearRect(0,0,200,60);
-  const tSprites = [
-    { data:SP_MALE_A, attire:'matcha', x:10 },
-    { data:SP_FEMALE_A, attire:'blue', x:60 },
-    { data:SP_HIJAB_A, attire:'brown', x:110 },
-    { data:SP_MALE_B, attire:'blue', x:155 },
-  ];
-  tSprites.forEach(m=>{
-    const cm = colorMap(m.attire);
-    const sc2 = 2;
-    drawSprite(sctx, m.data, cm, m.x, 60-24*sc2, sc2);
-  });
+    // ==================== SCREEN NAV ====================
+    function go(id) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
 
-  // Falling elements
-  const box = document.getElementById('krain');
-  const icons = ['🍡','✨','🏮','🌙','🌟','🪔','🎋','🌺'];
-  for (let i=0;i<14;i++) {
-    const d = document.createElement('div');
-    d.className = 'k-drop';
-    d.style.fontSize = (14+Math.random()*10)+'px';
-    d.textContent = icons[i%icons.length];
-    d.style.left = (Math.random()*92)+'%';
-    d.style.animationDuration = (3+Math.random()*5)+'s';
-    d.style.animationDelay = (Math.random()*6)+'s';
-    box.appendChild(d);
-  }
+    // ==================== SCREEN 1: TITLE ====================
+    function initTitle() {
+      const c = document.getElementById('title-canvas');
+      const W = 440, H = 160;
+      c.width = W; c.height = H;
+      const ctx = c.getContext('2d');
 
-  document.getElementById('s1').addEventListener('click', ()=>{
-    SFX.intro();
-    go('s2');
-    renderCharPreview();
-  });
-}
+      // Outer border
+      ctx.fillStyle = '#ffd700'; ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = '#000'; ctx.fillRect(4, 4, W - 8, H - 8);
+      ctx.fillStyle = '#1a0a4e'; ctx.fillRect(8, 8, W - 16, H - 16);
 
-// ==================== CHARACTER CREATION ====================
-function setGender(g) {
-  S.gender = g;
-  document.getElementById('t-male').classList.toggle('on', g==='male');
-  document.getElementById('t-female').classList.toggle('on', g==='female');
-  document.getElementById('hijab-row').style.display = g==='female' ? 'block' : 'none';
-  if (g==='male') { S.hijab=false; document.getElementById('inp-hijab').checked=false; }
-  renderCharPreview();
-}
+      // Corner stars
+      [[16, 16], [W - 20, 16], [16, H - 20], [W - 20, H - 20]].forEach(([x, y]) => {
+        ctx.fillStyle = '#ffd700'; ctx.fillRect(x - 4, y, 9, 3); ctx.fillRect(x, y - 4, 3, 9);
+      });
 
-function setStyle(st) {
-  S.style = st;
-  document.getElementById('t-styleA').classList.toggle('on', st==='A');
-  document.getElementById('t-styleB').classList.toggle('on', st==='B');
-  renderCharPreview();
-}
+      // Title lines
+      ctx.textAlign = 'center';
+      ctx.shadowColor = '#ffd700'; ctx.shadowBlur = 15;
+      ctx.fillStyle = '#ffd700';
+      ctx.font = 'bold 15px "Press Start 2P",monospace';
+      ctx.fillText('OPEN HOUSE QUEST', W / 2, 46);
+      ctx.shadowBlur = 0;
 
-function setHijab(v) { S.hijab=v; renderCharPreview(); }
+      ctx.fillStyle = '#e8a0b4';
+      ctx.font = '11px "Press Start 2P",monospace';
+      ctx.fillText('Final Fantasy', W / 2, 74);
 
-function setAttire(a) {
-  S.attire = a;
-  ['matcha','brown','blue'].forEach(k=>document.getElementById('c-'+k).classList.toggle('on',k===a));
-  renderCharPreview();
-}
+      ctx.fillStyle = '#7daa6e';
+      ctx.font = '11px "Press Start 2P",monospace';
+      ctx.fillText('Ketupat  🍡', W / 2, 100);
 
-function renderCharPreview() {
-  const c = document.getElementById('char-canvas');
-  const ctx = c.getContext('2d');
-  ctx.clearRect(0,0,96,96);
-  ctx.fillStyle='#87ceeb'; ctx.fillRect(0,0,96,96);
-  ctx.fillStyle='#5ba233'; ctx.fillRect(0,72,96,24);
-  const sc=3;
-  drawSprite(ctx, getSprite(), colorMap(S.attire), Math.floor((96-16*sc)/2), 72-24*sc, sc);
-}
+      ctx.fillStyle = 'rgba(255,215,0,0.5)';
+      ctx.font = '7px "Press Start 2P",monospace';
+      ctx.fillText('Raya 2026 • 11 April • Arm & Mida', W / 2, 130);
 
-function toParty() {
-  const n = document.getElementById('inp-name').value.trim();
-  if (!n) { notify('Oi! Masukkan nama hero kau dulu! 😤'); return; }
-  S.name = n;
-  go('s3');
-  renderPartySprites();
-}
+      // Pixel decorations
+      [30, 60, 90, 360, 390, 420].forEach(x => {
+        ctx.fillStyle = '#ffd700'; ctx.fillRect(x, H - 24, 4, 4); ctx.fillRect(x, 20, 4, 4);
+      });
 
-// ==================== PARTY SIZE ====================
-let _gCount = 1;
+      // Title sprites (little characters on screen 1)
+      const sc = document.getElementById('title-sprites');
+      const sctx = sc.getContext('2d');
+      sctx.clearRect(0, 0, 200, 60);
+      const tSprites = [
+        { data: SP_MALE_A, attire: 'matcha', x: 10 },
+        { data: SP_FEMALE_A, attire: 'blue', x: 60 },
+        { data: SP_HIJAB_A, attire: 'brown', x: 110 },
+        { data: SP_MALE_B, attire: 'blue', x: 155 },
+      ];
+      tSprites.forEach(m => {
+        const cm = colorMap(m.attire);
+        const sc2 = 2;
+        drawSprite(sctx, m.data, cm, m.x, 60 - 24 * sc2, sc2);
+      });
 
-function setPartyMode(m) {
-  S.partyMode = m;
-  document.getElementById('t-solo').classList.toggle('on', m==='solo');
-  document.getElementById('t-group').classList.toggle('on', m==='group');
-  const opts = document.getElementById('group-opts');
-  if (m==='group') {
-    opts.style.display='flex';
-    _gCount=1;
-    S.guests=[{gender:'male',age:'adult'}];
-    document.getElementById('count-display').textContent=1;
-    renderGuestEntries();
-  } else {
-    opts.style.display='none';
-    S.guests=[];
-  }
-  renderPartySprites();
-}
+      // Falling elements
+      const box = document.getElementById('krain');
+      const icons = ['🍡', '✨', '🏮', '🌙', '🌟', '🪔', '🎋', '🌺'];
+      for (let i = 0; i < 14; i++) {
+        const d = document.createElement('div');
+        d.className = 'k-drop';
+        d.style.fontSize = (14 + Math.random() * 10) + 'px';
+        d.textContent = icons[i % icons.length];
+        d.style.left = (Math.random() * 92) + '%';
+        d.style.animationDuration = (3 + Math.random() * 5) + 's';
+        d.style.animationDelay = (Math.random() * 6) + 's';
+        box.appendChild(d);
+      }
 
-function changeCount(d) {
-  _gCount = Math.max(1, Math.min(9, _gCount+d));
-  document.getElementById('count-display').textContent=_gCount;
-  while (S.guests.length<_gCount) S.guests.push({gender:'male',age:'adult'});
-  while (S.guests.length>_gCount) S.guests.pop();
-  renderGuestEntries();
-  renderPartySprites();
-}
+      document.getElementById('s1').addEventListener('click', () => {
+        SFX.intro();
+        go('s2');
+        renderCharPreview();
+      });
+    }
 
-function renderGuestEntries() {
-  const box = document.getElementById('guest-entries');
-  box.innerHTML = '';
-  S.guests.forEach((g,i) => {
-    const row = document.createElement('div');
-    row.className = 'guest-row';
-    row.innerHTML = `
-      <span class="pixel-text" style="min-width:48px;font-size:6px;">Geng ${i+1}:</span>
+    // ==================== CHARACTER CREATION ====================
+    function setGender(g) {
+      S.gender = g;
+      document.getElementById('t-male').classList.toggle('on', g === 'male');
+      document.getElementById('t-female').classList.toggle('on', g === 'female');
+      document.getElementById('hijab-row').style.display = g === 'female' ? 'block' : 'none';
+      if (g === 'male') { S.hijab = false; document.getElementById('inp-hijab').checked = false; }
+      renderCharPreview();
+    }
+
+    function setStyle(st) {
+      S.style = st;
+      document.getElementById('t-styleA').classList.toggle('on', st === 'A');
+      document.getElementById('t-styleB').classList.toggle('on', st === 'B');
+      renderCharPreview();
+    }
+
+    function setHijab(v) { S.hijab = v; renderCharPreview(); }
+
+    function setAttire(a) {
+      S.attire = a;
+      ['matcha', 'brown', 'blue'].forEach(k => document.getElementById('c-' + k).classList.toggle('on', k === a));
+      renderCharPreview();
+    }
+
+    function renderCharPreview() {
+      const c = document.getElementById('char-canvas');
+      const ctx = c.getContext('2d');
+      ctx.clearRect(0, 0, 96, 96);
+      ctx.fillStyle = '#87ceeb'; ctx.fillRect(0, 0, 96, 96);
+      ctx.fillStyle = '#5ba233'; ctx.fillRect(0, 72, 96, 24);
+      const sc = 3;
+      drawSprite(ctx, getSprite(), colorMap(S.attire), Math.floor((96 - 16 * sc) / 2), 72 - 24 * sc, sc);
+    }
+
+    function toParty() {
+      const n = document.getElementById('inp-name').value.trim();
+      if (!n) { notify('Oi! Masukkan nama hero kau dulu! 😤'); return; }
+      S.name = n;
+      go('s3');
+      renderPartySprites();
+    }
+
+    // ==================== PARTY SIZE ====================
+    let _gCount = 1;
+
+    function setPartyMode(m) {
+      S.partyMode = m;
+      document.getElementById('t-solo').classList.toggle('on', m === 'solo');
+      document.getElementById('t-group').classList.toggle('on', m === 'group');
+      const opts = document.getElementById('group-opts');
+      if (m === 'group') {
+        opts.style.display = 'flex';
+        _gCount = 1;
+        S.guests = [{ gender: 'male', age: 'adult' }];
+        document.getElementById('count-display').textContent = 1;
+        renderGuestEntries();
+      } else {
+        opts.style.display = 'none';
+        S.guests = [];
+      }
+      renderPartySprites();
+    }
+
+    function changeCount(d) {
+      _gCount = Math.max(1, Math.min(9, _gCount + d));
+      document.getElementById('count-display').textContent = _gCount;
+      while (S.guests.length < _gCount) S.guests.push({ gender: 'male', age: 'adult' });
+      while (S.guests.length > _gCount) S.guests.pop();
+      renderGuestEntries();
+      renderPartySprites();
+    }
+
+    function renderGuestEntries() {
+      const box = document.getElementById('guest-entries');
+      box.innerHTML = '';
+      S.guests.forEach((g, i) => {
+        const row = document.createElement('div');
+        row.className = 'guest-row';
+        row.innerHTML = `
+      <span class="pixel-text" style="min-width:48px;font-size:6px;">Geng ${i + 1}:</span>
       <div style="display:flex;gap:6px;flex-wrap:wrap;flex:1;">
         <div class="toggle-row" style="flex:1;min-width:88px;">
-          <button class="toggle ${g.gender==='male'?'on':''}" style="font-size:6px;padding:7px 4px;" onclick="setG(${i},'gender','male')">♂ L</button>
-          <button class="toggle ${g.gender==='female'?'on':''}" style="font-size:6px;padding:7px 4px;" onclick="setG(${i},'gender','female')">♀ P</button>
+          <button class="toggle ${g.gender === 'male' ? 'on' : ''}" style="font-size:6px;padding:7px 4px;" onclick="setG(${i},'gender','male')">♂ L</button>
+          <button class="toggle ${g.gender === 'female' ? 'on' : ''}" style="font-size:6px;padding:7px 4px;" onclick="setG(${i},'gender','female')">♀ P</button>
         </div>
         <div class="toggle-row" style="flex:1;min-width:108px;">
-          <button class="toggle ${g.age==='adult'?'on':''}" style="font-size:6px;padding:7px 4px;" onclick="setG(${i},'age','adult')">Dewasa</button>
-          <button class="toggle ${g.age==='toddler'?'on':''}" style="font-size:6px;padding:7px 4px;" onclick="setG(${i},'age','toddler')">Kanak²</button>
+          <button class="toggle ${g.age === 'adult' ? 'on' : ''}" style="font-size:6px;padding:7px 4px;" onclick="setG(${i},'age','adult')">Dewasa</button>
+          <button class="toggle ${g.age === 'toddler' ? 'on' : ''}" style="font-size:6px;padding:7px 4px;" onclick="setG(${i},'age','toddler')">Kanak²</button>
         </div>
       </div>`;
-    box.appendChild(row);
-  });
-}
-
-function setG(i, key, val) {
-  S.guests[i][key]=val;
-  SFX.click();
-  renderGuestEntries();
-  renderPartySprites();
-}
-
-function renderPartySprites() {
-  const box = document.getElementById('party-sprites');
-  if (!box) return;
-  box.innerHTML='';
-  const all = [{ data:getSprite(), attire:S.attire, toddler:false }];
-  if (S.partyMode==='group') {
-    S.guests.forEach(g => all.push({
-      data: getGuestSprite(g.gender, S.style),
-      attire: S.attire,
-      toddler: g.age==='toddler'
-    }));
-  }
-  all.forEach(m => {
-    const sc = m.toddler ? 2 : 3;
-    const cv = document.createElement('canvas');
-    cv.width=16*sc; cv.height=24*sc;
-    drawSprite(cv.getContext('2d'), m.data, colorMap(m.attire), 0, 0, sc);
-    box.appendChild(cv);
-  });
-}
-
-function toMap() {
-  S.extras = S.partyMode==='group' ? _gCount : 0;
-  go('s4');
-  drawMap();
-}
-
-// ==================== MAP ====================
-function drawMap() {
-  const c = document.getElementById('map-canvas');
-  const ctx = c.getContext('2d');
-  const W=280, H=190;
-
-  ctx.fillStyle='#d4b896'; ctx.fillRect(0,0,W,H);
-
-  ctx.strokeStyle='rgba(0,0,0,0.07)'; ctx.lineWidth=1;
-  for(let x=0;x<W;x+=20){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
-  for(let y=0;y<H;y+=20){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
-
-  ctx.fillStyle='#8bc34a';
-  ctx.fillRect(10,10,55,35); ctx.fillRect(185,108,75,48);
-
-  ctx.fillStyle='#b0bec5'; ctx.fillRect(0,90,W,12);
-  ctx.fillStyle='#b0bec5'; ctx.fillRect(122,0,12,H);
-  ctx.fillStyle='#ffd700'; ctx.fillRect(0,95,W,2); ctx.fillRect(127,0,2,H);
-
-  const hc=['#f5deb3','#dda0dd','#90ee90','#ffd700','#87ceeb','#f08080'];
-  [[18,130],[56,130],[94,130],[18,162],[56,162],[94,162]].forEach(([hx,hy],i)=>{
-    ctx.fillStyle=hc[i]; ctx.fillRect(hx,hy+9,16,12);
-    ctx.fillStyle='#c0392b';
-    ctx.beginPath();ctx.moveTo(hx-2,hy+9);ctx.lineTo(hx+8,hy);ctx.lineTo(hx+18,hy+9);ctx.fill();
-    ctx.fillStyle='#5d8aa8'; ctx.fillRect(hx+5,hy+14,6,7);
-  });
-
-  const mx=128, my=58;
-  let r=0;
-  const pulse=setInterval(()=>{
-    if(!document.getElementById('s4').classList.contains('active')){clearInterval(pulse);return;}
-    ctx.fillStyle='#b0bec5'; ctx.fillRect(mx-22,my-28,46,56);
-    ctx.fillStyle='#ffd700'; ctx.fillRect(127,my-28,2,56);
-    ctx.fillStyle='#ff3333'; ctx.beginPath(); ctx.arc(mx,my,10,0,Math.PI*2); ctx.fill();
-    ctx.font='13px sans-serif'; ctx.textAlign='center'; ctx.fillText('🏠',mx,my+5);
-    ctx.strokeStyle=`rgba(255,51,51,${Math.max(0,0.6-(r/22))})`;
-    ctx.lineWidth=2; ctx.beginPath(); ctx.arc(mx,my,10+r,0,Math.PI*2); ctx.stroke();
-    r=(r+1)%22;
-  }, 55);
-
-  ctx.fillStyle='#ff3333'; ctx.beginPath(); ctx.arc(mx,my,10,0,Math.PI*2); ctx.fill();
-  ctx.font='13px sans-serif'; ctx.textAlign='center'; ctx.fillText('🏠',mx,my+5);
-}
-
-function openNav(type) {
-  if (type==='google') window.open('https://maps.app.goo.gl/5bc7ZCBizmsbBBY17','_blank');
-  else window.open('https://ul.waze.com/ul?place=ChIJvwDP-T3LzTERnmiDz7MfNDo&ll=3.02511840%2C101.79150720&navigate=yes&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location','_blank');
-}
-
-// ==================== TIME SLOT ====================
-function pickTime(slot) {
-  SFX.select();
-  S.slot=slot;
-  ['1pm','3pm','5pm','8pm'].forEach(s=>document.getElementById('tc-'+s).classList.remove('on'));
-  document.getElementById('tc-'+slot).classList.add('on');
-  const scr=document.getElementById('s5');
-  const night=slot==='5pm'||slot==='8pm';
-  scr.className='screen active '+(night?'bg-night':'bg-day');
-  let stars=document.getElementById('night-stars');
-  if(night){
-    if(!stars){
-      stars=document.createElement('div');
-      stars.id='night-stars';
-      stars.style.cssText='position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden;';
-      for(let i=0;i<35;i++){
-        const s2=document.createElement('div');
-        s2.style.cssText=`position:absolute;left:${Math.random()*100}%;top:${Math.random()*50}%;width:${1+Math.random()*2}px;height:${1+Math.random()*2}px;background:#fff;border-radius:50%;animation:blink ${0.8+Math.random()*2}s ease-in-out infinite;`;
-        stars.appendChild(s2);
-      }
-      scr.appendChild(stars);
-    }
-    stars.style.display='block';
-  } else if(stars){ stars.style.display='none'; }
-  const nb=document.getElementById('time-next');
-  nb.disabled=false; nb.style.opacity='1';
-}
-
-function toCutscene() {
-  if(!S.slot) return;
-  SFX.confirm();
-  go('s6');
-  startCutscene();
-}
-
-// ==================== CUTSCENE ====================
-let _cutRAF=null;
-
-function startCutscene() {
-  const c=document.getElementById('cut-canvas');
-  const W=Math.min(window.innerWidth,480);
-  const H=window.innerHeight;
-  c.width=W; c.height=H;
-  const ctx=c.getContext('2d');
-  const isNight=S.slot==='5pm'||S.slot==='8pm';
-  const t0=Date.now();
-  const DUR=6000; // 6 seconds
-  let scrollX=0;
-
-  const party=[{data:getSprite(),cm:colorMap(S.attire),toddler:false}];
-  if(S.partyMode==='group'){
-    S.guests.forEach(g=>party.push({
-      data:getGuestSprite(g.gender,S.style),
-      cm:colorMap(S.attire),
-      toddler:g.age==='toddler'
-    }));
-  }
-  const phases=party.map((_,i)=>i*0.6);
-  const xPos=party.map((_,i)=>-80-i*55);
-
-  function frame(){
-    if(!document.getElementById('s6').classList.contains('active'))return;
-    const elapsed=Date.now()-t0;
-    scrollX=elapsed/28;
-    ctx.clearRect(0,0,W,H);
-
-    // Sky
-    const sk=ctx.createLinearGradient(0,0,0,H*0.62);
-    if(isNight){sk.addColorStop(0,'#050518');sk.addColorStop(1,'#1a1a4e');}
-    else{sk.addColorStop(0,'#4fc3f7');sk.addColorStop(1,'#87ceeb');}
-    ctx.fillStyle=sk; ctx.fillRect(0,0,W,H*0.62);
-
-    if(!isNight){
-      ctx.fillStyle='#ffd700'; ctx.beginPath(); ctx.arc(W*0.82,H*0.12,30,0,Math.PI*2); ctx.fill();
-      [0,1,2].forEach(i=>{
-        const cx=((i*190-scrollX*0.14+W*2)%(W*1.5))-50;
-        ctx.fillStyle='rgba(255,255,255,0.88)';
-        ctx.beginPath();ctx.arc(cx,32+i*26,16,0,Math.PI*2);
-        ctx.arc(cx+19,27+i*26,21,0,Math.PI*2);
-        ctx.arc(cx+38,32+i*26,15,0,Math.PI*2);ctx.fill();
-      });
-    } else {
-      for(let i=0;i<55;i++){
-        const sx=((i*137+scrollX*0.07)%W+W)%W;
-        const sy=(i*73)%(H*0.52);
-        ctx.fillStyle=`rgba(255,255,255,${0.35+Math.random()*0.45})`;
-        ctx.fillRect(sx,sy,i%3?1:2,i%3?1:2);
-      }
-      [0,1,2,3].forEach(i=>{
-        const lx=((i*135-scrollX*0.22+W*2)%(W*1.5))-45;
-        const ly=36+Math.sin(Date.now()/850+i)*6;
-        ctx.fillStyle='#e65100'; ctx.fillRect(lx,ly,12,16);
-        ctx.fillStyle='rgba(255,215,0,0.55)'; ctx.fillRect(lx+2,ly+2,8,12);
-        ctx.strokeStyle='#999'; ctx.lineWidth=1;
-        ctx.beginPath();ctx.moveTo(lx+6,ly);ctx.lineTo(lx+6,ly-20);ctx.stroke();
+        box.appendChild(row);
       });
     }
 
-    ctx.fillStyle=isNight?'#0d3b1a':'#5ba233'; ctx.fillRect(0,H*0.62,W,H*0.18);
-    ctx.fillStyle=isNight?'#0a2e12':'#4a8f29'; ctx.fillRect(0,H*0.8,W,H*0.2);
-
-    for(let i=0;i<10;i++){
-      const tx=((i*145-scrollX*0.48+W*2)%(W*1.9))-65;
-      const ty=H*0.62-58;
-      ctx.fillStyle=isNight?'#1a0a00':'#5d4037'; ctx.fillRect(tx+10,ty+40,8,18);
-      ctx.fillStyle=isNight?'#0a2e12':'#2e7d32';
-      ctx.fillRect(tx,ty+20,28,20); ctx.fillRect(tx+4,ty+8,20,14); ctx.fillRect(tx+8,ty,12,10);
+    function setG(i, key, val) {
+      S.guests[i][key] = val;
+      SFX.click();
+      renderGuestEntries();
+      renderPartySprites();
     }
 
-    const hcols=['#f5deb3','#dda0dd','#ffd700','#87ceeb'];
-    for(let i=0;i<5;i++){
-      const hx=((i*185-scrollX*0.33+W*2)%(W*1.6))-65;
-      const hy=H*0.62-40;
-      ctx.fillStyle=hcols[i%4]; ctx.fillRect(hx,hy+14,38,24);
-      ctx.fillStyle='#c0392b';
-      ctx.beginPath();ctx.moveTo(hx-3,hy+14);ctx.lineTo(hx+19,hy);ctx.lineTo(hx+41,hy+14);ctx.fill();
-      if(isNight){ctx.fillStyle='rgba(255,215,0,0.65)';ctx.fillRect(hx+13,hy+19,12,10);}
+    function renderPartySprites() {
+      const box = document.getElementById('party-sprites');
+      if (!box) return;
+      box.innerHTML = '';
+      const all = [{ data: getSprite(), attire: S.attire, toddler: false }];
+      if (S.partyMode === 'group') {
+        S.guests.forEach(g => all.push({
+          data: getGuestSprite(g.gender, S.style),
+          attire: S.attire,
+          toddler: g.age === 'toddler'
+        }));
+      }
+      all.forEach(m => {
+        const sc = m.toddler ? 2 : 3;
+        const cv = document.createElement('canvas');
+        cv.width = 16 * sc; cv.height = 24 * sc;
+        drawSprite(cv.getContext('2d'), m.data, colorMap(m.attire), 0, 0, sc);
+        box.appendChild(cv);
+      });
     }
 
-    ctx.fillStyle=isNight?'#2d2d3d':'#9e9e9e'; ctx.fillRect(0,H*0.77,W,H*0.05);
-    for(let i=0;i<8;i++){
-      const rx=((i*82-scrollX*1.1+W)%W+W)%W-32;
-      ctx.fillStyle='#ffd700'; ctx.fillRect(rx,H*0.792,38,2);
+    function toMap() {
+      S.extras = S.partyMode === 'group' ? _gCount : 0;
+      go('s4');
+      drawMap();
     }
 
-    // Party walking
-    const groundY=H*0.77;
-    party.forEach((m,idx)=>{
-      const sc=m.toddler?2.5:3.5;
-      const sh=24*sc;
-      const tgt=48+idx*52;
-      if(xPos[idx]<tgt) xPos[idx]=Math.min(xPos[idx]+3.5,tgt);
-      phases[idx]+=0.17;
-      const bob=Math.abs(Math.sin(phases[idx]))*7;
-      drawSprite(ctx,m.data,m.cm,xPos[idx],groundY-sh-bob,sc);
-    });
+    // ==================== MAP ====================
+    function drawMap() {
+      const c = document.getElementById('map-canvas');
+      const ctx = c.getContext('2d');
+      const W = 280, H = 190;
 
-    const prog=elapsed/DUR;
-    if(prog>0.3){
-      const a=Math.min(1,(prog-0.3)/0.2);
-      ctx.fillStyle=`rgba(0,0,0,${a*0.55})`; ctx.fillRect(0,H*0.06,W,72);
-      ctx.fillStyle=`rgba(255,215,0,${a})`; ctx.textAlign='center';
-      ctx.font='9px "Press Start 2P",monospace';
-      ctx.fillText('Dan bermulalah perjalanan',W/2,H*0.06+26);
-      ctx.fillText('epic mereka...',W/2,H*0.06+50);
+      ctx.fillStyle = '#d4b896'; ctx.fillRect(0, 0, W, H);
+
+      ctx.strokeStyle = 'rgba(0,0,0,0.07)'; ctx.lineWidth = 1;
+      for (let x = 0; x < W; x += 20) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+      for (let y = 0; y < H; y += 20) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+
+      ctx.fillStyle = '#8bc34a';
+      ctx.fillRect(10, 10, 55, 35); ctx.fillRect(185, 108, 75, 48);
+
+      ctx.fillStyle = '#b0bec5'; ctx.fillRect(0, 90, W, 12);
+      ctx.fillStyle = '#b0bec5'; ctx.fillRect(122, 0, 12, H);
+      ctx.fillStyle = '#ffd700'; ctx.fillRect(0, 95, W, 2); ctx.fillRect(127, 0, 2, H);
+
+      const hc = ['#f5deb3', '#dda0dd', '#90ee90', '#ffd700', '#87ceeb', '#f08080'];
+      [[18, 130], [56, 130], [94, 130], [18, 162], [56, 162], [94, 162]].forEach(([hx, hy], i) => {
+        ctx.fillStyle = hc[i]; ctx.fillRect(hx, hy + 9, 16, 12);
+        ctx.fillStyle = '#c0392b';
+        ctx.beginPath(); ctx.moveTo(hx - 2, hy + 9); ctx.lineTo(hx + 8, hy); ctx.lineTo(hx + 18, hy + 9); ctx.fill();
+        ctx.fillStyle = '#5d8aa8'; ctx.fillRect(hx + 5, hy + 14, 6, 7);
+      });
+
+      const mx = 128, my = 58;
+      let r = 0;
+      const pulse = setInterval(() => {
+        if (!document.getElementById('s4').classList.contains('active')) { clearInterval(pulse); return; }
+        ctx.fillStyle = '#b0bec5'; ctx.fillRect(mx - 22, my - 28, 46, 56);
+        ctx.fillStyle = '#ffd700'; ctx.fillRect(127, my - 28, 2, 56);
+        ctx.fillStyle = '#ff3333'; ctx.beginPath(); ctx.arc(mx, my, 10, 0, Math.PI * 2); ctx.fill();
+        ctx.font = '13px sans-serif'; ctx.textAlign = 'center'; ctx.fillText('🏠', mx, my + 5);
+        ctx.strokeStyle = `rgba(255,51,51,${Math.max(0, 0.6 - (r / 22))})`;
+        ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(mx, my, 10 + r, 0, Math.PI * 2); ctx.stroke();
+        r = (r + 1) % 22;
+      }, 55);
+
+      ctx.fillStyle = '#ff3333'; ctx.beginPath(); ctx.arc(mx, my, 10, 0, Math.PI * 2); ctx.fill();
+      ctx.font = '13px sans-serif'; ctx.textAlign = 'center'; ctx.fillText('🏠', mx, my + 5);
     }
-    if(prog>0.65){
-      ctx.fillStyle=`rgba(255,215,0,${Math.min(1,(prog-0.65)/0.15)})`;
-      ctx.font='8px "Press Start 2P",monospace'; ctx.textAlign='center';
-      ctx.fillText('...menuju Rumah Arm & Mida! 🏠',W/2,H*0.06+72);
+
+    function openNav(type) {
+      if (type === 'google') window.open('https://maps.app.goo.gl/5bc7ZCBizmsbBBY17', '_blank');
+      else window.open('https://ul.waze.com/ul?place=ChIJvwDP-T3LzTERnmiDz7MfNDo&ll=3.02511840%2C101.79150720&navigate=yes&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location', '_blank');
     }
 
-    if(elapsed>=DUR){ toConfirm(); return; }
-    _cutRAF=requestAnimationFrame(frame);
-  }
+    // ==================== TIME SLOT ====================
+    function pickTime(slot) {
+      SFX.select();
+      S.slot = slot;
+      ['1pm', '3pm', '5pm', '8pm'].forEach(s => document.getElementById('tc-' + s).classList.remove('on'));
+      document.getElementById('tc-' + slot).classList.add('on');
+      const scr = document.getElementById('s5');
+      const night = slot === '5pm' || slot === '8pm';
+      scr.className = 'screen active ' + (night ? 'bg-night' : 'bg-day');
+      let stars = document.getElementById('night-stars');
+      if (night) {
+        if (!stars) {
+          stars = document.createElement('div');
+          stars.id = 'night-stars';
+          stars.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden;';
+          for (let i = 0; i < 35; i++) {
+            const s2 = document.createElement('div');
+            s2.style.cssText = `position:absolute;left:${Math.random() * 100}%;top:${Math.random() * 50}%;width:${1 + Math.random() * 2}px;height:${1 + Math.random() * 2}px;background:#fff;border-radius:50%;animation:blink ${0.8 + Math.random() * 2}s ease-in-out infinite;`;
+            stars.appendChild(s2);
+          }
+          scr.appendChild(stars);
+        }
+        stars.style.display = 'block';
+      } else if (stars) { stars.style.display = 'none'; }
+      const nb = document.getElementById('time-next');
+      nb.disabled = false; nb.style.opacity = '1';
+    }
 
-  if(_cutRAF) cancelAnimationFrame(_cutRAF);
-  _cutRAF=requestAnimationFrame(frame);
-}
+    function toCutscene() {
+      if (!S.slot) return;
+      SFX.confirm();
+      go('s6');
+      startCutscene();
+    }
 
-function skipCut(){
-  if(_cutRAF) cancelAnimationFrame(_cutRAF);
-  toConfirm();
-}
+    // ==================== CUTSCENE ====================
+    let _cutRAF = null;
 
-// ==================== CONFIRMATION ====================
-function toConfirm(){
-  SFX.complete();
-  go('s7');
+    function startCutscene() {
+      const c = document.getElementById('cut-canvas');
+      const W = Math.min(window.innerWidth, 480);
+      const H = window.innerHeight;
+      c.width = W; c.height = H;
+      const ctx = c.getContext('2d');
+      const isNight = S.slot === '5pm' || S.slot === '8pm';
+      const t0 = Date.now();
+      const DUR = 6000; // 6 seconds
+      let scrollX = 0;
 
-  let am=0,af=0,tm=0,tf=0;
-  if(S.gender==='male') am++; else af++;
-  S.guests.forEach(g=>{
-    if(g.age==='adult'){if(g.gender==='male')am++;else af++;}
-    else{if(g.gender==='male')tm++;else tf++;}
-  });
-  const total=am+af+tm+tf;
-  const labels={'1pm':'1:00 PM','3pm':'3:00 PM','5pm':'5:00 PM','8pm':'8:00 PM'};
+      const party = [{ data: getSprite(), cm: colorMap(S.attire), toddler: false }];
+      if (S.partyMode === 'group') {
+        S.guests.forEach(g => party.push({
+          data: getGuestSprite(g.gender, S.style),
+          cm: colorMap(S.attire),
+          toddler: g.age === 'toddler'
+        }));
+      }
+      const phases = party.map((_, i) => i * 0.6);
+      const xPos = party.map((_, i) => -80 - i * 55);
 
-  let breakdown='';
-  if(am) breakdown+=`<span style="font-size:7px;">&nbsp;&nbsp;👨 ${am} Dewasa Lelaki</span><br>`;
-  if(af) breakdown+=`<span style="font-size:7px;">&nbsp;&nbsp;👩 ${af} Dewasa Perempuan</span><br>`;
-  if(tm) breakdown+=`<span style="font-size:7px;">&nbsp;&nbsp;👦 ${tm} Kanak-kanak Lelaki</span><br>`;
-  if(tf) breakdown+=`<span style="font-size:7px;">&nbsp;&nbsp;👧 ${tf} Kanak-kanak Perempuan</span><br>`;
+      function frame() {
+        if (!document.getElementById('s6').classList.contains('active')) return;
+        const elapsed = Date.now() - t0;
+        scrollX = elapsed / 28;
+        ctx.clearRect(0, 0, W, H);
 
-  const styleLabel = S.style==='A' ? 'Klasik 🏰' : 'Moden ✨';
-  document.getElementById('conf-details').innerHTML=`
+        // Sky
+        const sk = ctx.createLinearGradient(0, 0, 0, H * 0.62);
+        if (isNight) { sk.addColorStop(0, '#050518'); sk.addColorStop(1, '#1a1a4e'); }
+        else { sk.addColorStop(0, '#4fc3f7'); sk.addColorStop(1, '#87ceeb'); }
+        ctx.fillStyle = sk; ctx.fillRect(0, 0, W, H * 0.62);
+
+        if (!isNight) {
+          ctx.fillStyle = '#ffd700'; ctx.beginPath(); ctx.arc(W * 0.82, H * 0.12, 30, 0, Math.PI * 2); ctx.fill();
+          [0, 1, 2].forEach(i => {
+            const cx = ((i * 190 - scrollX * 0.14 + W * 2) % (W * 1.5)) - 50;
+            ctx.fillStyle = 'rgba(255,255,255,0.88)';
+            ctx.beginPath(); ctx.arc(cx, 32 + i * 26, 16, 0, Math.PI * 2);
+            ctx.arc(cx + 19, 27 + i * 26, 21, 0, Math.PI * 2);
+            ctx.arc(cx + 38, 32 + i * 26, 15, 0, Math.PI * 2); ctx.fill();
+          });
+        } else {
+          for (let i = 0; i < 55; i++) {
+            const sx = ((i * 137 + scrollX * 0.07) % W + W) % W;
+            const sy = (i * 73) % (H * 0.52);
+            ctx.fillStyle = `rgba(255,255,255,${0.35 + Math.random() * 0.45})`;
+            ctx.fillRect(sx, sy, i % 3 ? 1 : 2, i % 3 ? 1 : 2);
+          }
+          [0, 1, 2, 3].forEach(i => {
+            const lx = ((i * 135 - scrollX * 0.22 + W * 2) % (W * 1.5)) - 45;
+            const ly = 36 + Math.sin(Date.now() / 850 + i) * 6;
+            ctx.fillStyle = '#e65100'; ctx.fillRect(lx, ly, 12, 16);
+            ctx.fillStyle = 'rgba(255,215,0,0.55)'; ctx.fillRect(lx + 2, ly + 2, 8, 12);
+            ctx.strokeStyle = '#999'; ctx.lineWidth = 1;
+            ctx.beginPath(); ctx.moveTo(lx + 6, ly); ctx.lineTo(lx + 6, ly - 20); ctx.stroke();
+          });
+        }
+
+        ctx.fillStyle = isNight ? '#0d3b1a' : '#5ba233'; ctx.fillRect(0, H * 0.62, W, H * 0.18);
+        ctx.fillStyle = isNight ? '#0a2e12' : '#4a8f29'; ctx.fillRect(0, H * 0.8, W, H * 0.2);
+
+        for (let i = 0; i < 10; i++) {
+          const tx = ((i * 145 - scrollX * 0.48 + W * 2) % (W * 1.9)) - 65;
+          const ty = H * 0.62 - 58;
+          ctx.fillStyle = isNight ? '#1a0a00' : '#5d4037'; ctx.fillRect(tx + 10, ty + 40, 8, 18);
+          ctx.fillStyle = isNight ? '#0a2e12' : '#2e7d32';
+          ctx.fillRect(tx, ty + 20, 28, 20); ctx.fillRect(tx + 4, ty + 8, 20, 14); ctx.fillRect(tx + 8, ty, 12, 10);
+        }
+
+        const hcols = ['#f5deb3', '#dda0dd', '#ffd700', '#87ceeb'];
+        for (let i = 0; i < 5; i++) {
+          const hx = ((i * 185 - scrollX * 0.33 + W * 2) % (W * 1.6)) - 65;
+          const hy = H * 0.62 - 40;
+          ctx.fillStyle = hcols[i % 4]; ctx.fillRect(hx, hy + 14, 38, 24);
+          ctx.fillStyle = '#c0392b';
+          ctx.beginPath(); ctx.moveTo(hx - 3, hy + 14); ctx.lineTo(hx + 19, hy); ctx.lineTo(hx + 41, hy + 14); ctx.fill();
+          if (isNight) { ctx.fillStyle = 'rgba(255,215,0,0.65)'; ctx.fillRect(hx + 13, hy + 19, 12, 10); }
+        }
+
+        ctx.fillStyle = isNight ? '#2d2d3d' : '#9e9e9e'; ctx.fillRect(0, H * 0.77, W, H * 0.05);
+        for (let i = 0; i < 8; i++) {
+          const rx = ((i * 82 - scrollX * 1.1 + W) % W + W) % W - 32;
+          ctx.fillStyle = '#ffd700'; ctx.fillRect(rx, H * 0.792, 38, 2);
+        }
+
+        // Party walking
+        const groundY = H * 0.77;
+        party.forEach((m, idx) => {
+          const sc = m.toddler ? 2.5 : 3.5;
+          const sh = 24 * sc;
+          const tgt = 48 + idx * 52;
+          if (xPos[idx] < tgt) xPos[idx] = Math.min(xPos[idx] + 3.5, tgt);
+          phases[idx] += 0.17;
+          const bob = Math.abs(Math.sin(phases[idx])) * 7;
+          drawSprite(ctx, m.data, m.cm, xPos[idx], groundY - sh - bob, sc);
+        });
+
+        const prog = elapsed / DUR;
+        if (prog > 0.3) {
+          const a = Math.min(1, (prog - 0.3) / 0.2);
+          ctx.fillStyle = `rgba(0,0,0,${a * 0.55})`; ctx.fillRect(0, H * 0.06, W, 72);
+          ctx.fillStyle = `rgba(255,215,0,${a})`; ctx.textAlign = 'center';
+          ctx.font = '9px "Press Start 2P",monospace';
+          ctx.fillText('Dan bermulalah perjalanan', W / 2, H * 0.06 + 26);
+          ctx.fillText('epic mereka...', W / 2, H * 0.06 + 50);
+        }
+        if (prog > 0.65) {
+          ctx.fillStyle = `rgba(255,215,0,${Math.min(1, (prog - 0.65) / 0.15)})`;
+          ctx.font = '8px "Press Start 2P",monospace'; ctx.textAlign = 'center';
+          ctx.fillText('...menuju Rumah Arm & Mida! 🏠', W / 2, H * 0.06 + 72);
+        }
+
+        if (elapsed >= DUR) { toConfirm(); return; }
+        _cutRAF = requestAnimationFrame(frame);
+      }
+
+      if (_cutRAF) cancelAnimationFrame(_cutRAF);
+      _cutRAF = requestAnimationFrame(frame);
+    }
+
+    function skipCut() {
+      if (_cutRAF) cancelAnimationFrame(_cutRAF);
+      toConfirm();
+    }
+
+    // ==================== CONFIRMATION ====================
+    function toConfirm() {
+      SFX.complete();
+      go('s7');
+
+      let am = 0, af = 0, tm = 0, tf = 0;
+      if (S.gender === 'male') am++; else af++;
+      S.guests.forEach(g => {
+        if (g.age === 'adult') { if (g.gender === 'male') am++; else af++; }
+        else { if (g.gender === 'male') tm++; else tf++; }
+      });
+      const total = am + af + tm + tf;
+      const labels = { '1pm': '1:00 PM', '3pm': '3:00 PM', '5pm': '5:00 PM', '8pm': '8:00 PM' };
+
+      let breakdown = '';
+      if (am) breakdown += `<span style="font-size:7px;">&nbsp;&nbsp;👨 ${am} Dewasa Lelaki</span><br>`;
+      if (af) breakdown += `<span style="font-size:7px;">&nbsp;&nbsp;👩 ${af} Dewasa Perempuan</span><br>`;
+      if (tm) breakdown += `<span style="font-size:7px;">&nbsp;&nbsp;👦 ${tm} Kanak-kanak Lelaki</span><br>`;
+      if (tf) breakdown += `<span style="font-size:7px;">&nbsp;&nbsp;👧 ${tf} Kanak-kanak Perempuan</span><br>`;
+
+      const styleLabel = S.style === 'A' ? 'Klasik 🏰' : 'Moden ✨';
+      document.getElementById('conf-details').innerHTML = `
     🧙 Hero: <span style="color:#8b4513;">${esc(S.name)}</span><br>
-    ⏰ Masa: <span style="color:#8b4513;">${labels[S.slot]||S.slot}</span><br>
+    ⏰ Masa: <span style="color:#8b4513;">${labels[S.slot] || S.slot}</span><br>
     👘 Gaya: <span style="color:#8b4513;">${styleLabel} · ${ATTIRE[S.attire].name}</span><br>
     👥 Jumlah: <span style="color:#8b4513;">${total} orang</span><br>
     <span style="color:#555; line-height:2.2;">${breakdown}</span>
   `;
 
-  const c=document.getElementById('conf-sprite');
-  c.width=120; c.height=120;
-  const ctx=c.getContext('2d');
-  ctx.fillStyle='#87ceeb'; ctx.fillRect(0,0,120,120);
-  ctx.fillStyle='#5ba233'; ctx.fillRect(0,90,120,30);
-  const sc=4, sw=16*sc, sh=24*sc;
-  drawSprite(ctx,getSprite(),colorMap(S.attire),Math.floor((120-sw)/2),90-sh,sc);
+      const c = document.getElementById('conf-sprite');
+      c.width = 120; c.height = 120;
+      const ctx = c.getContext('2d');
+      ctx.fillStyle = '#87ceeb'; ctx.fillRect(0, 0, 120, 120);
+      ctx.fillStyle = '#5ba233'; ctx.fillRect(0, 90, 120, 30);
+      const sc = 4, sw = 16 * sc, sh = 24 * sc;
+      drawSprite(ctx, getSprite(), colorMap(S.attire), Math.floor((120 - sw) / 2), 90 - sh, sc);
 
-  saveRSVP(am,af,tm,tf,total);
-}
-
-async function saveRSVP(am,af,tm,tf,total){
-  const msg=document.getElementById('rsvp-msg');
-  if(SB_URL==='YOUR_SUPABASE_URL'){
-    msg.textContent='⚠️ Supabase belum setup — baca supabase-setup.md';
-    msg.style.color='#c0392b'; return;
-  }
-  try{
-    const r=await fetch(SB_URL+'/rest/v1/rsvp',{
-      method:'POST',
-      headers:{
-        'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,
-        'Content-Type':'application/json','Prefer':'return=minimal'
-      },
-      body:JSON.stringify({
-        guest_name:S.name,gender:S.gender,has_hijab:S.hijab,
-        attire_colour:S.attire,time_slot:S.slot,total_pax:total,
-        adult_male:am,adult_female:af,toddler_male:tm,toddler_female:tf
-      })
-    });
-    if(r.ok){msg.textContent='✅ RSVP tersimpan! Jumpa di sana! 🎉';msg.style.color='#4a8f29';}
-    else throw 0;
-  }catch(e){
-    msg.textContent='⚠️ Tak dapat save. Takpe, Arm & Mida tunggu!';
-    msg.style.color='#c0392b';
-  }
-}
-
-function addCal(){
-  SFX.click();
-  const starts={'1pm':'050000Z','3pm':'070000Z','5pm':'090000Z','8pm':'120000Z'};
-  const ends  ={'1pm':'070000Z','3pm':'090000Z','5pm':'110000Z','8pm':'140000Z'};
-  const s=starts[S.slot]||'050000Z', e2=ends[S.slot]||'070000Z';
-  const url=`https://calendar.google.com/calendar/render?action=TEMPLATE&text=Open+House+Quest%3A+Final+Fantasy+Ketupat+%F0%9F%8F%A0&dates=20260411T${s}/20260411T${e2}&details=Jom+datang+rumah+Arm+%26+Mida+for+Raya+open+house!+%F0%9F%8C%99&location=7-13+Residensi+Vista+Agresif+Kajang`;
-  window.open(url,'_blank');
-}
-
-function submitNew(){
-  S.name=''; S.gender='male'; S.style='A'; S.hijab=false; S.attire='matcha';
-  S.partyMode='solo'; S.extras=0; S.guests=[]; S.slot=null; _gCount=1;
-  document.getElementById('inp-name').value='';
-  document.getElementById('inp-hijab').checked=false;
-  document.getElementById('hijab-row').style.display='none';
-  document.getElementById('group-opts').style.display='none';
-  ['matcha','brown','blue'].forEach(k=>document.getElementById('c-'+k).classList.toggle('on',k==='matcha'));
-  document.getElementById('t-styleA').classList.add('on');
-  document.getElementById('t-styleB').classList.remove('on');
-  document.getElementById('t-male').classList.add('on');
-  document.getElementById('t-female').classList.remove('on');
-  document.getElementById('t-solo').classList.add('on');
-  document.getElementById('t-group').classList.remove('on');
-  const nb=document.getElementById('time-next');
-  nb.disabled=true; nb.style.opacity='0.5';
-  ['1pm','3pm','5pm','8pm'].forEach(s=>document.getElementById('tc-'+s).classList.remove('on'));
-  document.getElementById('rsvp-msg').textContent='';
-  go('s2');
-  renderCharPreview();
-}
-
-function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
-
-// ==================== DRAGON MINI-GAME ====================
-let _dTimer=null, _dRAF=null;
-
-// Raya food projectile types
-const RAYA_FOODS=[
-  { name:'ketupat', color:'#7daa6e', shape:'diamond', accent:'#2e7d32' },
-  { name:'lemang',  color:'#c8956a', shape:'cylinder', accent:'#6b3a2a' },
-  { name:'kuih',    color:'#e8a0b4', shape:'round',   accent:'#c2185b' },
-  { name:'dodol',   color:'#3d2b1f', shape:'rect',    accent:'#6d4c41' },
-];
-
-function drawFood(ctx, food, x, y) {
-  const f=RAYA_FOODS[food.type];
-  ctx.fillStyle=f.color;
-  if(f.shape==='diamond'){
-    ctx.beginPath();
-    ctx.moveTo(x,y-12); ctx.lineTo(x+10,y);
-    ctx.lineTo(x,y+12); ctx.lineTo(x-10,y);
-    ctx.closePath(); ctx.fill();
-    ctx.strokeStyle=f.accent; ctx.lineWidth=2; ctx.stroke();
-    // Woven pattern
-    ctx.strokeStyle='rgba(0,0,0,0.3)'; ctx.lineWidth=1;
-    ctx.beginPath(); ctx.moveTo(x-5,y-4); ctx.lineTo(x+5,y+4); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(x+5,y-4); ctx.lineTo(x-5,y+4); ctx.stroke();
-  } else if(f.shape==='cylinder'){
-    ctx.fillRect(x-5,y-10,10,20);
-    ctx.fillStyle=f.accent; ctx.fillRect(x-5,y-10,10,3); ctx.fillRect(x-5,y+7,10,3);
-    ctx.strokeStyle='rgba(0,0,0,0.3)'; ctx.lineWidth=1;
-    ctx.beginPath(); ctx.moveTo(x,y-10); ctx.lineTo(x,y+10); ctx.stroke();
-  } else if(f.shape==='round'){
-    ctx.beginPath(); ctx.arc(x,y,10,0,Math.PI*2); ctx.fill();
-    ctx.fillStyle=f.accent;
-    ctx.beginPath(); ctx.arc(x-2,y-2,3,0,Math.PI*2); ctx.fill();
-    ctx.beginPath(); ctx.arc(x+3,y+2,2,0,Math.PI*2); ctx.fill();
-  } else {
-    ctx.fillRect(x-8,y-6,16,12);
-    ctx.fillStyle=f.accent; ctx.fillRect(x-8,y-6,16,3);
-  }
-}
-
-function enterDragon(){ SFX.select(); go('s8'); startDragonGame(); }
-
-function startDragonGame(){
-  document.getElementById('dragon-overlay').style.display='none';
-  if(_dTimer) clearInterval(_dTimer);
-  if(_dRAF) cancelAnimationFrame(_dRAF);
-
-  const c=document.getElementById('dragon-canvas');
-  const W=Math.min(window.innerWidth,480);
-  const H=window.innerHeight-44;
-  c.width=W; c.height=H;
-  const ctx=c.getContext('2d');
-
-  const GROUND=H*0.72;
-  const PX=55, PSC=3, PH=24*PSC;
-  const pcm=colorMap(S.attire);
-  const pdata=getSprite();
-
-  let hp=3, timeLeft=30, dead=false, won=false;
-  let jumpY=0, jumpV=0, jumping=false;
-  let foods=[], lastFood=0;
-  let dPhase=0, bgScroll=0, invFrames=0, walkPhase=0;
-
-  document.getElementById('timer').textContent=30;
-  document.getElementById('hearts').textContent='❤️❤️❤️';
-
-  _dTimer=setInterval(()=>{
-    if(dead||won){clearInterval(_dTimer);return;}
-    timeLeft--;
-    document.getElementById('timer').textContent=timeLeft;
-    if(timeLeft<=0){won=true;endDragon(true);}
-  },1000);
-
-  function jump(){ if(!jumping&&!dead&&!won){jumping=true;jumpV=-16;SFX.jump();} }
-
-  const onKey=e=>{if(e.code==='Space'){jump();e.preventDefault();}};
-  document.addEventListener('keydown',onKey);
-  c.addEventListener('click',jump);
-  c.addEventListener('touchstart',e=>{jump();e.preventDefault();},{passive:false});
-  window._dCleanup=()=>{document.removeEventListener('keydown',onKey);};
-
-  // Dragon pixel art (12×11, scale 5)
-  const DRG_A=[
-    [0,0,0,0,1,1,1,0,0,0,0,0],
-    [0,0,0,1,1,2,1,1,0,0,0,0],
-    [0,0,1,1,2,2,2,1,1,0,0,0],
-    [0,1,1,1,2,3,2,1,1,1,0,0],
-    [1,1,1,1,1,2,1,1,1,1,0,0],
-    [1,1,1,1,1,1,1,1,1,1,1,0],
-    [0,1,1,1,1,1,1,1,1,1,1,0],
-    [0,0,1,1,1,1,1,1,1,1,0,0],
-    [0,0,0,1,1,1,1,1,1,0,0,0],
-    [0,0,0,0,1,1,0,1,1,0,0,0],
-    [0,0,0,0,1,1,0,1,1,0,0,0],
-  ];
-  const DRG_B=[
-    [0,0,0,0,1,1,1,0,0,0,0,0],
-    [0,0,0,1,1,2,1,1,0,0,0,4],
-    [0,0,1,1,2,2,2,1,1,0,4,4],
-    [0,1,1,1,2,3,2,1,1,4,4,0],
-    [1,1,1,1,1,2,1,1,1,4,0,0],
-    [1,1,1,1,1,1,1,1,1,1,1,0],
-    [0,1,1,1,1,1,1,1,1,1,1,0],
-    [0,0,1,1,1,1,1,1,1,1,0,0],
-    [0,0,0,1,1,1,1,1,1,0,0,0],
-    [0,0,0,0,1,1,0,1,1,0,0,0],
-    [0,0,0,0,1,1,0,1,1,0,0,0],
-  ];
-  const dcm={1:'#388e3c',2:'#ff6f00',3:'#ffd600',4:'#2e7d32'};
-
-  function drawDragon(x,y,frame){
-    const data=frame%2===0?DRG_A:DRG_B;
-    const sc=5;
-    data.forEach((row,sy)=>row.forEach((ci,sx)=>{
-      if(!ci)return;
-      ctx.fillStyle=dcm[ci];
-      ctx.fillRect(x+sx*sc,y+sy*sc,sc,sc);
-    }));
-  }
-
-  function frame(ts){
-    if(!document.getElementById('s8').classList.contains('active')){clearInterval(_dTimer);return;}
-    if(dead||won)return;
-
-    bgScroll=(bgScroll+3)%W;
-    ctx.clearRect(0,0,W,H);
-    ctx.fillStyle='#0a0a2e'; ctx.fillRect(0,0,W,H);
-
-    for(let i=0;i<45;i++){
-      const sx=((i*127+bgScroll*0.18)%W+W)%W;
-      const sy=(i*53)%(H*0.65);
-      ctx.fillStyle='rgba(255,255,255,0.55)'; ctx.fillRect(sx,sy,i%4?1:2,i%4?1:2);
-    }
-    [80,220,360].forEach((lx,i)=>{
-      const lx2=((lx-bgScroll*0.35+W)%W+W)%W;
-      const ly=38+Math.sin(ts/820+i)*5;
-      ctx.fillStyle='#e65100'; ctx.fillRect(lx2,ly,10,14);
-      ctx.fillStyle='rgba(255,200,0,0.5)'; ctx.fillRect(lx2+1,ly+2,8,10);
-    });
-
-    ctx.fillStyle='#1a3a1a'; ctx.fillRect(0,GROUND,W,H-GROUND);
-    ctx.fillStyle='#2d5a2d'; ctx.fillRect(0,GROUND,W,4);
-
-    // Jump physics
-    if(jumping){jumpV+=1.1;jumpY-=jumpV;if(jumpY<=0){jumpY=0;jumpV=0;jumping=false;}}
-    invFrames=Math.max(0,invFrames-1);
-    dPhase+=0.04; walkPhase+=0.2;
-
-    const DX=W-85, DY=GROUND-11*5-18+Math.sin(dPhase)*12;
-    drawDragon(DX,DY,Math.floor(ts/350)%2);
-
-    // Spawn raya food
-    if(ts-lastFood>1100+Math.random()*900){
-      foods.push({
-        x:DX-5,
-        y:DY+30,
-        v:4.5+Math.random()*3.5,
-        type:Math.floor(Math.random()*RAYA_FOODS.length),
-        wobble:Math.random()*Math.PI*2
-      });
-      lastFood=ts;
+      saveRSVP(am, af, tm, tf, total);
     }
 
-    foods=foods.filter(f=>f.x>-25);
-    foods.forEach(f=>{
-      f.x-=f.v;
-      f.wobble+=0.1;
-      drawFood(ctx,f,f.x,f.y+Math.sin(f.wobble)*4);
-      if(invFrames<=0){
-        const py=GROUND-PH-jumpY;
-        if(f.x<PX+16*PSC-4&&f.x>PX+4&&f.y>py+4&&f.y<py+PH){
-          hp--;invFrames=55;foods=foods.filter(ff=>ff!==f);
-          SFX.hit();
-          const hh=['❤️❤️❤️','❤️❤️🖤','❤️🖤🖤','🖤🖤🖤'];
-          document.getElementById('hearts').textContent=hh[3-Math.max(0,hp)];
-          if(hp<=0){dead=true;endDragon(false);return;}
+    async function saveRSVP(am, af, tm, tf, total) {
+      const msg = document.getElementById('rsvp-msg');
+      if (SB_URL === 'YOUR_SUPABASE_URL') {
+        msg.textContent = '⚠️ Supabase belum setup — baca supabase-setup.md';
+        msg.style.color = '#c0392b'; return;
+      }
+      try {
+        const r = await fetch(SB_URL + '/rest/v1/rsvp', {
+          method: 'POST',
+          headers: {
+            'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY,
+            'Content-Type': 'application/json', 'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify({
+            guest_name: S.name, gender: S.gender, has_hijab: S.hijab,
+            attire_colour: S.attire, time_slot: S.slot, total_pax: total,
+            adult_male: am, adult_female: af, toddler_male: tm, toddler_female: tf
+          })
+        });
+        if (r.ok) { msg.textContent = '✅ RSVP tersimpan! Jumpa di sana! 🎉'; msg.style.color = '#4a8f29'; }
+        else throw 0;
+      } catch (e) {
+        msg.textContent = '⚠️ Tak dapat save. Takpe, Arm & Mida tunggu!';
+        msg.style.color = '#c0392b';
+      }
+    }
+
+    function addCal() {
+      SFX.click();
+      const starts = { '1pm': '050000Z', '3pm': '070000Z', '5pm': '090000Z', '8pm': '120000Z' };
+      const ends = { '1pm': '070000Z', '3pm': '090000Z', '5pm': '110000Z', '8pm': '140000Z' };
+      const s = starts[S.slot] || '050000Z', e2 = ends[S.slot] || '070000Z';
+      const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=Open+House+Quest%3A+Final+Fantasy+Ketupat+%F0%9F%8F%A0&dates=20260411T${s}/20260411T${e2}&details=Jom+datang+rumah+Arm+%26+Mida+for+Raya+open+house!+%F0%9F%8C%99&location=7-13+Residensi+Vista+Agresif+Kajang`;
+      window.open(url, '_blank');
+    }
+
+    function submitNew() {
+      S.name = ''; S.gender = 'male'; S.style = 'A'; S.hijab = false; S.attire = 'matcha';
+      S.partyMode = 'solo'; S.extras = 0; S.guests = []; S.slot = null; _gCount = 1;
+      document.getElementById('inp-name').value = '';
+      document.getElementById('inp-hijab').checked = false;
+      document.getElementById('hijab-row').style.display = 'none';
+      document.getElementById('group-opts').style.display = 'none';
+      ['matcha', 'brown', 'blue'].forEach(k => document.getElementById('c-' + k).classList.toggle('on', k === 'matcha'));
+      document.getElementById('t-styleA').classList.add('on');
+      document.getElementById('t-styleB').classList.remove('on');
+      document.getElementById('t-male').classList.add('on');
+      document.getElementById('t-female').classList.remove('on');
+      document.getElementById('t-solo').classList.add('on');
+      document.getElementById('t-group').classList.remove('on');
+      const nb = document.getElementById('time-next');
+      nb.disabled = true; nb.style.opacity = '0.5';
+      ['1pm', '3pm', '5pm', '8pm'].forEach(s => document.getElementById('tc-' + s).classList.remove('on'));
+      document.getElementById('rsvp-msg').textContent = '';
+      go('s2');
+      renderCharPreview();
+    }
+
+    function esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+    // ==================== DRAGON MINI-GAME ====================
+    let _dTimer = null, _dRAF = null;
+
+    // Raya food projectile types
+    const RAYA_FOODS = [
+      { name: 'ketupat', color: '#7daa6e', shape: 'diamond', accent: '#2e7d32' },
+      { name: 'lemang', color: '#c8956a', shape: 'cylinder', accent: '#6b3a2a' },
+      { name: 'kuih', color: '#e8a0b4', shape: 'round', accent: '#c2185b' },
+      { name: 'dodol', color: '#3d2b1f', shape: 'rect', accent: '#6d4c41' },
+    ];
+
+    function drawFood(ctx, food, x, y) {
+      const f = RAYA_FOODS[food.type];
+      ctx.fillStyle = f.color;
+      if (f.shape === 'diamond') {
+        ctx.beginPath();
+        ctx.moveTo(x, y - 12); ctx.lineTo(x + 10, y);
+        ctx.lineTo(x, y + 12); ctx.lineTo(x - 10, y);
+        ctx.closePath(); ctx.fill();
+        ctx.strokeStyle = f.accent; ctx.lineWidth = 2; ctx.stroke();
+        // Woven pattern
+        ctx.strokeStyle = 'rgba(0,0,0,0.3)'; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(x - 5, y - 4); ctx.lineTo(x + 5, y + 4); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(x + 5, y - 4); ctx.lineTo(x - 5, y + 4); ctx.stroke();
+      } else if (f.shape === 'cylinder') {
+        ctx.fillRect(x - 5, y - 10, 10, 20);
+        ctx.fillStyle = f.accent; ctx.fillRect(x - 5, y - 10, 10, 3); ctx.fillRect(x - 5, y + 7, 10, 3);
+        ctx.strokeStyle = 'rgba(0,0,0,0.3)'; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(x, y - 10); ctx.lineTo(x, y + 10); ctx.stroke();
+      } else if (f.shape === 'round') {
+        ctx.beginPath(); ctx.arc(x, y, 10, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = f.accent;
+        ctx.beginPath(); ctx.arc(x - 2, y - 2, 3, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.arc(x + 3, y + 2, 2, 0, Math.PI * 2); ctx.fill();
+      } else {
+        ctx.fillRect(x - 8, y - 6, 16, 12);
+        ctx.fillStyle = f.accent; ctx.fillRect(x - 8, y - 6, 16, 3);
+      }
+    }
+
+    function enterDragon() { SFX.select(); go('s8'); startDragonGame(); }
+
+    function startDragonGame() {
+      document.getElementById('dragon-overlay').style.display = 'none';
+      if (_dTimer) clearInterval(_dTimer);
+      if (_dRAF) cancelAnimationFrame(_dRAF);
+
+      const c = document.getElementById('dragon-canvas');
+      const W = Math.min(window.innerWidth, 480);
+      const H = window.innerHeight - 44;
+      c.width = W; c.height = H;
+      const ctx = c.getContext('2d');
+
+      const GROUND = H * 0.72;
+      const PX = 55, PSC = 3, PH = 24 * PSC;
+      const pcm = colorMap(S.attire);
+      const pdata = getSprite();
+
+      let hp = 3, timeLeft = 30, dead = false, won = false;
+      let jumpY = 0, jumpV = 0, jumping = false;
+      let foods = [], lastFood = 0;
+      let dPhase = 0, bgScroll = 0, invFrames = 0, walkPhase = 0;
+
+      document.getElementById('timer').textContent = 30;
+      document.getElementById('hearts').textContent = '❤️❤️❤️';
+
+      _dTimer = setInterval(() => {
+        if (dead || won) { clearInterval(_dTimer); return; }
+        timeLeft--;
+        document.getElementById('timer').textContent = timeLeft;
+        if (timeLeft <= 0) { won = true; endDragon(true); }
+      }, 1000);
+
+      function jump() { if (!jumping && !dead && !won) { jumping = true; jumpV = -16; SFX.jump(); } }
+
+      const onKey = e => { if (e.code === 'Space') { jump(); e.preventDefault(); } };
+      document.addEventListener('keydown', onKey);
+      c.addEventListener('click', jump);
+      c.addEventListener('touchstart', e => { jump(); e.preventDefault(); }, { passive: false });
+      window._dCleanup = () => { document.removeEventListener('keydown', onKey); };
+
+      // Dragon pixel art (12×11, scale 5)
+      const DRG_A = [
+        [0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0],
+        [0, 0, 0, 1, 1, 2, 1, 1, 0, 0, 0, 0],
+        [0, 0, 1, 1, 2, 2, 2, 1, 1, 0, 0, 0],
+        [0, 1, 1, 1, 2, 3, 2, 1, 1, 1, 0, 0],
+        [1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 0, 0],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+        [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+        [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+        [0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0],
+        [0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0],
+        [0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0],
+      ];
+      const DRG_B = [
+        [0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0],
+        [0, 0, 0, 1, 1, 2, 1, 1, 0, 0, 0, 4],
+        [0, 0, 1, 1, 2, 2, 2, 1, 1, 0, 4, 4],
+        [0, 1, 1, 1, 2, 3, 2, 1, 1, 4, 4, 0],
+        [1, 1, 1, 1, 1, 2, 1, 1, 1, 4, 0, 0],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+        [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+        [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+        [0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0],
+        [0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0],
+        [0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0],
+      ];
+      const dcm = { 1: '#388e3c', 2: '#ff6f00', 3: '#ffd600', 4: '#2e7d32' };
+
+      function drawDragon(x, y, frame) {
+        const data = frame % 2 === 0 ? DRG_A : DRG_B;
+        const sc = 5;
+        data.forEach((row, sy) => row.forEach((ci, sx) => {
+          if (!ci) return;
+          ctx.fillStyle = dcm[ci];
+          ctx.fillRect(x + sx * sc, y + sy * sc, sc, sc);
+        }));
+      }
+
+      function frame(ts) {
+        if (!document.getElementById('s8').classList.contains('active')) { clearInterval(_dTimer); return; }
+        if (dead || won) return;
+
+        bgScroll = (bgScroll + 3) % W;
+        ctx.clearRect(0, 0, W, H);
+        ctx.fillStyle = '#0a0a2e'; ctx.fillRect(0, 0, W, H);
+
+        for (let i = 0; i < 45; i++) {
+          const sx = ((i * 127 + bgScroll * 0.18) % W + W) % W;
+          const sy = (i * 53) % (H * 0.65);
+          ctx.fillStyle = 'rgba(255,255,255,0.55)'; ctx.fillRect(sx, sy, i % 4 ? 1 : 2, i % 4 ? 1 : 2);
         }
+        [80, 220, 360].forEach((lx, i) => {
+          const lx2 = ((lx - bgScroll * 0.35 + W) % W + W) % W;
+          const ly = 38 + Math.sin(ts / 820 + i) * 5;
+          ctx.fillStyle = '#e65100'; ctx.fillRect(lx2, ly, 10, 14);
+          ctx.fillStyle = 'rgba(255,200,0,0.5)'; ctx.fillRect(lx2 + 1, ly + 2, 8, 10);
+        });
+
+        ctx.fillStyle = '#1a3a1a'; ctx.fillRect(0, GROUND, W, H - GROUND);
+        ctx.fillStyle = '#2d5a2d'; ctx.fillRect(0, GROUND, W, 4);
+
+        // Jump physics
+        if (jumping) { jumpV += 1.1; jumpY -= jumpV; if (jumpY <= 0) { jumpY = 0; jumpV = 0; jumping = false; } }
+        invFrames = Math.max(0, invFrames - 1);
+        dPhase += 0.04; walkPhase += 0.2;
+
+        const DX = W - 85, DY = GROUND - 11 * 5 - 18 + Math.sin(dPhase) * 12;
+        drawDragon(DX, DY, Math.floor(ts / 350) % 2);
+
+        // Spawn raya food
+        if (ts - lastFood > 1100 + Math.random() * 900) {
+          foods.push({
+            x: DX - 5,
+            y: DY + 30,
+            v: 4.5 + Math.random() * 3.5,
+            type: Math.floor(Math.random() * RAYA_FOODS.length),
+            wobble: Math.random() * Math.PI * 2
+          });
+          lastFood = ts;
+        }
+
+        foods = foods.filter(f => f.x > -25);
+        foods.forEach(f => {
+          f.x -= f.v;
+          f.wobble += 0.1;
+          drawFood(ctx, f, f.x, f.y + Math.sin(f.wobble) * 4);
+          if (invFrames <= 0) {
+            const py = GROUND - PH - jumpY;
+            if (f.x < PX + 16 * PSC - 4 && f.x > PX + 4 && f.y > py + 4 && f.y < py + PH) {
+              hp--; invFrames = 55; foods = foods.filter(ff => ff !== f);
+              SFX.hit();
+              const hh = ['❤️❤️❤️', '❤️❤️🖤', '❤️🖤🖤', '🖤🖤🖤'];
+              document.getElementById('hearts').textContent = hh[3 - Math.max(0, hp)];
+              if (hp <= 0) { dead = true; endDragon(false); return; }
+            }
+          }
+        });
+
+        const py = GROUND - PH - jumpY;
+        const bob = jumping ? 0 : Math.abs(Math.sin(walkPhase)) * 3;
+        if (!(invFrames > 0 && Math.floor(invFrames / 4) % 2 === 0)) {
+          drawSprite(ctx, pdata, pcm, PX, py - bob, PSC);
+        }
+
+        // HUD: food names floating
+        if (foods.length > 0) {
+          const f = foods[0];
+          ctx.fillStyle = 'rgba(255,215,0,0.7)';
+          ctx.font = '6px "Press Start 2P",monospace';
+          ctx.textAlign = 'center';
+          ctx.fillText(RAYA_FOODS[f.type].name + '!', f.x, f.y - 18);
+        }
+
+        _dRAF = requestAnimationFrame(frame);
+      }
+      _dRAF = requestAnimationFrame(frame);
+    }
+
+    function endDragon(won) {
+      if (_dRAF) { cancelAnimationFrame(_dRAF); _dRAF = null; }
+      clearInterval(_dTimer);
+      if (window._dCleanup) window._dCleanup();
+      const overlay = document.getElementById('dragon-overlay');
+      const res = document.getElementById('dragon-result');
+      const btns = document.getElementById('dragon-btns');
+      overlay.style.display = 'flex';
+      if (won) {
+        SFX.victory();
+        res.textContent = '🏆 MENANG!!\n\nKau survived\nthe dragon!\n\nLegend betul! 😤';
+        res.style.color = '#ffd700';
+        btns.innerHTML = `<button class="btn btn-gold" onclick="shareDragon()">📤 SHARE</button><button class="btn btn-green" onclick="go('s7')">🏠 BALIK</button>`;
+      } else {
+        res.textContent = '💀 KENA MAKAN!\n\nKetupat + lemang\ntoo OP lah...\n\nTry lagi? 😭';
+        res.style.color = '#ff4444';
+        btns.innerHTML = `<button class="btn btn-red" onclick="startDragonGame()">🔄 RETRY</button><button class="btn btn-green" onclick="go('s7')">🏠 BALIK</button>`;
+      }
+    }
+
+    function shareDragon() {
+      SFX.click();
+      const txt = '🐉 Aku survived ketupat + lemang attack dalam Open House Quest: Final Fantasy Ketupat!\n\nKorang boleh ke? 😤\n\n#OpenHouseQuest #RayaRPG2026 #FinalFantasyKetupat';
+      if (navigator.share) { navigator.share({ text: txt }); }
+      else { navigator.clipboard.writeText(txt).then(() => notify('Teks disalin! Share sekarang! 📋')); }
+    }
+
+    // ==================== UTILS ====================
+    let _notifTimer = null;
+    function notify(msg) {
+      const n = document.getElementById('notif');
+      n.textContent = msg; n.style.display = 'block';
+      if (_notifTimer) clearTimeout(_notifTimer);
+      _notifTimer = setTimeout(() => { n.style.display = 'none'; }, 3000);
+    }
+
+    // ==================== BOOT ====================
+    window.addEventListener('load', () => {
+      if (new URLSearchParams(location.search).has('admin')) {
+        showAdminPage();
+      } else {
+        initTitle();
       }
     });
 
-    const py=GROUND-PH-jumpY;
-    const bob=jumping?0:Math.abs(Math.sin(walkPhase))*3;
-    if(!(invFrames>0&&Math.floor(invFrames/4)%2===0)){
-      drawSprite(ctx,pdata,pcm,PX,py-bob,PSC);
-    }
-
-    // HUD: food names floating
-    if(foods.length>0){
-      const f=foods[0];
-      ctx.fillStyle='rgba(255,215,0,0.7)';
-      ctx.font='6px "Press Start 2P",monospace';
-      ctx.textAlign='center';
-      ctx.fillText(RAYA_FOODS[f.type].name+'!',f.x,f.y-18);
-    }
-
-    _dRAF=requestAnimationFrame(frame);
-  }
-  _dRAF=requestAnimationFrame(frame);
-}
-
-function endDragon(won){
-  if(_dRAF){cancelAnimationFrame(_dRAF);_dRAF=null;}
-  clearInterval(_dTimer);
-  if(window._dCleanup) window._dCleanup();
-  const overlay=document.getElementById('dragon-overlay');
-  const res=document.getElementById('dragon-result');
-  const btns=document.getElementById('dragon-btns');
-  overlay.style.display='flex';
-  if(won){
-    SFX.victory();
-    res.textContent='🏆 MENANG!!\n\nKau survived\nthe dragon!\n\nLegend betul! 😤';
-    res.style.color='#ffd700';
-    btns.innerHTML=`<button class="btn btn-gold" onclick="shareDragon()">📤 SHARE</button><button class="btn btn-green" onclick="go('s7')">🏠 BALIK</button>`;
-  } else {
-    res.textContent='💀 KENA MAKAN!\n\nKetupat + lemang\ntoo OP lah...\n\nTry lagi? 😭';
-    res.style.color='#ff4444';
-    btns.innerHTML=`<button class="btn btn-red" onclick="startDragonGame()">🔄 RETRY</button><button class="btn btn-green" onclick="go('s7')">🏠 BALIK</button>`;
-  }
-}
-
-function shareDragon(){
-  SFX.click();
-  const txt='🐉 Aku survived ketupat + lemang attack dalam Open House Quest: Final Fantasy Ketupat!\n\nKorang boleh ke? 😤\n\n#OpenHouseQuest #RayaRPG2026 #FinalFantasyKetupat';
-  if(navigator.share){navigator.share({text:txt});}
-  else{navigator.clipboard.writeText(txt).then(()=>notify('Teks disalin! Share sekarang! 📋'));}
-}
-
-// ==================== UTILS ====================
-let _notifTimer=null;
-function notify(msg){
-  const n=document.getElementById('notif');
-  n.textContent=msg; n.style.display='block';
-  if(_notifTimer) clearTimeout(_notifTimer);
-  _notifTimer=setTimeout(()=>{n.style.display='none';},3000);
-}
-
-// ==================== BOOT ====================
-window.addEventListener('load', () => {
-  if (new URLSearchParams(location.search).has('admin')) {
-    showAdminPage();
-  } else {
-    initTitle();
-  }
-});
-
-// ==================== ADMIN PAGE ====================
-async function showAdminPage() {
-  document.body.innerHTML = `
+    // ==================== ADMIN PAGE ====================
+    async function showAdminPage() {
+      document.body.innerHTML = `
     <div id="admin-wrap" style="
       font-family:'Press Start 2P',monospace;
       background:#0a0a1e; color:#ffe082;
@@ -1565,46 +1857,47 @@ async function showAdminPage() {
       <div id="admin-list" style="margin-top:24px;"></div>
     </div>`;
 
-  if (SB_URL === 'YOUR_SUPABASE_URL') {
-    document.getElementById('admin-stats').innerHTML =
-      '<span style="color:#e57373">⚠️ Supabase belum setup lagi!</span>';
-    return;
-  }
+      if (SB_URL === 'YOUR_SUPABASE_URL') {
+        document.getElementById('admin-stats').innerHTML =
+          '<span style="color:#e57373">⚠️ Supabase belum setup lagi!</span>';
+        return;
+      }
 
-  try {
-    const r = await fetch(SB_URL + '/rest/v1/rsvp?select=*&order=created_at.desc', {
-      headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY }
-    });
-    const data = await r.json();
+      try {
+        const r = await fetch(SB_URL + '/rest/v1/rsvp?select=*&order=created_at.desc', {
+          headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY }
+        });
+        const data = await r.json();
 
-    const totalPeople = data.reduce((s, x) => s + (x.total_pax || 1), 0);
-    const slots = { '1pm': 0, '3pm': 0, '5pm': 0, '8pm': 0 };
-    data.forEach(x => { if (slots[x.time_slot] !== undefined) slots[x.time_slot] += (x.total_pax || 1); });
+        const totalPeople = data.reduce((s, x) => s + (x.total_pax || 1), 0);
+        const slots = { '1pm': 0, '3pm': 0, '5pm': 0, '8pm': 0 };
+        data.forEach(x => { if (slots[x.time_slot] !== undefined) slots[x.time_slot] += (x.total_pax || 1); });
 
-    document.getElementById('admin-stats').innerHTML = `
+        document.getElementById('admin-stats').innerHTML = `
       <div style="background:#1a2a1a;border:2px solid #4a8f29;padding:16px;margin-bottom:16px;border-radius:4px;">
         <div style="font-size:14px;color:#a5d6a7;margin-bottom:12px;">📊 RINGKASAN</div>
         <div style="margin-bottom:8px;">🧑‍🤝‍🧑 Total RSVP: <span style="color:#fff">${data.length} kumpulan</span></div>
         <div style="margin-bottom:16px;">👥 Total Orang: <span style="color:#ffe082;font-size:14px">${totalPeople}</span></div>
         <div style="font-size:9px;color:#81d4fa;margin-bottom:6px;">SLOT:</div>
-        ${Object.entries(slots).map(([s,c])=>`<div style="margin-bottom:4px;">🕐 ${s}: <span style="color:#fff">${c} orang</span></div>`).join('')}
+        ${Object.entries(slots).map(([s, c]) => `<div style="margin-bottom:4px;">🕐 ${s}: <span style="color:#fff">${c} orang</span></div>`).join('')}
       </div>`;
 
-    const listHtml = data.map((x, i) => `
+        const listHtml = data.map((x, i) => `
       <div style="background:#111;border:1px solid #333;padding:12px;margin-bottom:8px;font-size:9px;">
-        <div style="color:#ffe082;margin-bottom:6px;">#${i+1} ${esc(x.guest_name || '?')}</div>
+        <div style="color:#ffe082;margin-bottom:6px;">#${i + 1} ${esc(x.guest_name || '?')}</div>
         <div style="color:#aaa;">⏰ ${x.time_slot} &nbsp;|&nbsp; 👥 ${x.total_pax || 1} orang</div>
         <div style="color:#aaa;margin-top:4px;">👗 ${x.attire_colour || '-'} &nbsp;|&nbsp; ${x.gender === 'female' ? '👩' : '👨'}</div>
       </div>`).join('');
 
-    document.getElementById('admin-list').innerHTML =
-      `<div style="font-size:10px;color:#81d4fa;margin-bottom:12px;">📋 SENARAI TETAMU</div>` + listHtml;
+        document.getElementById('admin-list').innerHTML =
+          `<div style="font-size:10px;color:#81d4fa;margin-bottom:12px;">📋 SENARAI TETAMU</div>` + listHtml;
 
-  } catch(e) {
-    document.getElementById('admin-stats').innerHTML =
-      '<span style="color:#e57373">⚠️ Gagal sambung ke Supabase.</span>';
-  }
-}
-</script>
+      } catch (e) {
+        document.getElementById('admin-stats').innerHTML =
+          '<span style="color:#e57373">⚠️ Gagal sambung ke Supabase.</span>';
+      }
+    }
+  </script>
 </body>
+
 </html>
