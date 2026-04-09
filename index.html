@@ -2022,53 +2022,36 @@
               </div>`).join('')}
           </div>`;
 
-        // Guest table — horizontally scrollable on mobile
+        // Guest cards — works on any screen size, no horizontal scroll needed
         const fmt = ts => {
           if(!ts) return '-';
           const d = new Date(ts);
-          const date = d.toLocaleDateString('ms-MY',{day:'2-digit',month:'short',year:'numeric'});
-          const time = d.toLocaleTimeString('ms-MY',{hour:'2-digit',minute:'2-digit'});
-          return `${date}<br><span style="color:#aaa">${time}</span>`;
+          return d.toLocaleDateString('ms-MY',{day:'2-digit',month:'short',year:'numeric'})
+            + ' ' + d.toLocaleTimeString('ms-MY',{hour:'2-digit',minute:'2-digit'});
         };
 
         document.getElementById('admin-list').innerHTML = `
           <div style="color:#81d4fa;font-size:13px;font-weight:bold;margin-bottom:12px;">📋 SENARAI TETAMU (${data.length})</div>
-          <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:8px;">
-          <table style="width:100%;min-width:700px;border-collapse:collapse;font-size:13px;color:#fff;">
-            <thead>
-              <tr style="background:#1a1a3e;color:#ffe082;text-align:left;">
-                <th style="padding:10px 8px;border-bottom:2px solid #333;white-space:nowrap;">#</th>
-                <th style="padding:10px 8px;border-bottom:2px solid #333;white-space:nowrap;">Nama</th>
-                <th style="padding:10px 8px;border-bottom:2px solid #333;white-space:nowrap;">Slot</th>
-                <th style="padding:10px 8px;border-bottom:2px solid #333;white-space:nowrap;">Total</th>
-                <th style="padding:10px 8px;border-bottom:2px solid #333;white-space:nowrap;">Dewasa ♂/♀</th>
-                <th style="padding:10px 8px;border-bottom:2px solid #333;white-space:nowrap;">Kanak ♂/♀</th>
-                <th style="padding:10px 8px;border-bottom:2px solid #333;white-space:nowrap;">Jenis</th>
-                <th style="padding:10px 8px;border-bottom:2px solid #333;white-space:nowrap;">Baju</th>
-                <th style="padding:10px 8px;border-bottom:2px solid #333;white-space:nowrap;">Masa</th>
-                <th style="padding:10px 8px;border-bottom:2px solid #333;white-space:nowrap;">Padam</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${data.map((x,i)=>`
-                <tr style="background:${i%2===0?'#111':'#161625'};border-bottom:1px solid #222;">
-                  <td style="padding:8px;color:#aaa;">${i+1}</td>
-                  <td style="padding:8px;color:#ffe082;font-weight:bold;white-space:nowrap;">${esc(x.guest_name||'?')}</td>
-                  <td style="padding:8px;color:#81d4fa;white-space:nowrap;">🕐 ${x.time_slot||'-'}</td>
-                  <td style="padding:8px;color:#a5d6a7;font-weight:bold;white-space:nowrap;">${x.total_pax||1} pax</td>
-                  <td style="padding:8px;white-space:nowrap;">${x.adult_male||0}♂ ${x.adult_female||0}♀</td>
-                  <td style="padding:8px;white-space:nowrap;">${x.toddler_male||0}♂ ${x.toddler_female||0}♀</td>
-                  <td style="padding:8px;white-space:nowrap;">${x.relation_type==='family'?'👨‍👩‍👧‍👦':x.relation_type==='friends'?'👫':'-'}</td>
-                  <td style="padding:8px;text-transform:capitalize;white-space:nowrap;">${x.attire_colour||'-'}</td>
-                  <td style="padding:8px;font-size:11px;color:#ccc;white-space:nowrap;">${fmt(x.created_at)}</td>
-                  <td style="padding:8px;">
-                    <button onclick="askDelete('${x.id}','${esc(x.guest_name||'?')}')"
-                      style="background:#c62828;color:#fff;border:none;border-radius:4px;padding:6px 10px;cursor:pointer;font-size:15px;line-height:1;">🗑️</button>
-                  </td>
-                </tr>`).join('')}
-            </tbody>
-          </table>
-          </div>`;
+          ${data.map((x,i)=>`
+            <div style="background:${i%2===0?'#111':'#161625'};border:1px solid #2a2a4a;border-radius:10px;padding:14px 16px;margin-bottom:10px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+                <div style="display:flex;align-items:center;gap:10px;flex:1;min-width:0;">
+                  <span style="color:#555;font-size:12px;flex-shrink:0;">#${i+1}</span>
+                  <span style="color:#ffe082;font-weight:bold;font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${esc(x.guest_name||'?')}</span>
+                </div>
+                <button onclick="askDelete('${x.id}','${esc(x.guest_name||'?')}')"
+                  style="background:#c62828;color:#fff;border:none;border-radius:6px;padding:8px 12px;cursor:pointer;font-size:15px;flex-shrink:0;margin-left:8px;">🗑️</button>
+              </div>
+              <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:13px;">
+                <span style="background:#1a2a4a;color:#81d4fa;padding:4px 10px;border-radius:20px;">🕐 ${x.time_slot||'-'}</span>
+                <span style="background:#1a3a1a;color:#a5d6a7;padding:4px 10px;border-radius:20px;">👥 ${x.total_pax||1} pax</span>
+                <span style="background:#2a1a3a;color:#ce93d8;padding:4px 10px;border-radius:20px;">🧑 ${x.adult_male||0}L ${x.adult_female||0}P</span>
+                ${((x.toddler_male||0)+(x.toddler_female||0))>0?`<span style="background:#3a2a1a;color:#ffcc80;padding:4px 10px;border-radius:20px;">🍼 ${x.toddler_male||0}L ${x.toddler_female||0}P</span>`:''}
+                <span style="background:#1a2a2a;color:#80cbc4;padding:4px 10px;border-radius:20px;">${x.relation_type==='family'?'👨‍👩‍👧‍👦 Keluarga':x.relation_type==='friends'?'👫 Kawan':'-'}</span>
+                <span style="background:#222;color:#ccc;padding:4px 10px;border-radius:20px;text-transform:capitalize;">👕 ${x.attire_colour||'-'}</span>
+              </div>
+              <div style="color:#666;font-size:11px;margin-top:8px;">📅 ${fmt(x.created_at)}</div>
+            </div>`).join('')}`;
 
       } catch(e) {
         document.getElementById('admin-stats').innerHTML =
