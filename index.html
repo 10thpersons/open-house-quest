@@ -1910,11 +1910,29 @@
 
     // ==================== ADMIN PAGE ====================
     async function showAdminPage() {
-      document.body.style.cssText = 'margin:0;padding:0;background:#0a0a1e;font-family:Arial,sans-serif;overflow-y:auto;height:auto;';
+      // Fix viewport for admin — allow pinch-zoom and horizontal scroll on mobile
+      document.querySelector('meta[name="viewport"]').setAttribute('content',
+        'width=device-width, initial-scale=1.0');
+
+      document.body.style.cssText = 'margin:0;padding:0;background:#0a0a1e;font-family:Arial,sans-serif;overflow-y:auto;overflow-x:hidden;height:auto;';
       document.body.innerHTML = `
-        <div style="max-width:900px;margin:auto;padding:24px 16px;">
-          <div style="font-family:\'Press Start 2P\',monospace;color:#ffe082;font-size:16px;margin-bottom:4px;">🏠 ADMIN PANEL</div>
-          <div style="font-family:\'Press Start 2P\',monospace;color:#81d4fa;font-size:9px;margin-bottom:24px;">Open House Quest: Final Fantasy Ketupat</div>
+        <div id="del-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:999;align-items:center;justify-content:center;">
+          <div style="background:#1a1a3e;border:2px solid #ffe082;border-radius:12px;padding:24px;width:290px;max-width:92vw;">
+            <div style="font-family:'Press Start 2P',monospace;color:#ffe082;font-size:11px;margin-bottom:16px;">🔐 PASSWORD UNTUK PADAM</div>
+            <input id="del-pw" type="password" inputmode="numeric" placeholder="Masukkan password"
+              style="width:100%;padding:12px;background:#111;color:#fff;border:1px solid #555;border-radius:6px;font-size:16px;box-sizing:border-box;margin-bottom:8px;">
+            <div id="del-err" style="color:#e57373;font-size:11px;min-height:18px;margin-bottom:12px;"></div>
+            <div style="display:flex;gap:8px;">
+              <button onclick="document.getElementById('del-modal').style.display='none'"
+                style="flex:1;padding:12px;background:#333;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:14px;">Batal</button>
+              <button id="del-ok"
+                style="flex:1;padding:12px;background:#c62828;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:14px;font-weight:bold;">🗑️ Padam</button>
+            </div>
+          </div>
+        </div>
+        <div style="max-width:960px;margin:auto;padding:20px 12px;">
+          <div style="font-family:'Press Start 2P',monospace;color:#ffe082;font-size:15px;margin-bottom:4px;">🏠 ADMIN PANEL</div>
+          <div style="font-family:'Press Start 2P',monospace;color:#81d4fa;font-size:9px;margin-bottom:24px;">Open House Quest: Final Fantasy Ketupat</div>
           <div id="admin-stats">Loading...</div>
           <div id="admin-list" style="margin-top:28px;"></div>
         </div>`;
@@ -1924,6 +1942,45 @@
           '<span style="color:#e57373">⚠️ Supabase belum setup lagi!</span>';
         return;
       }
+
+      // Delete handler — attached to the modal confirm button
+      window._deleteId = null;
+      document.getElementById('del-ok').onclick = async function() {
+        const pw = document.getElementById('del-pw').value.trim();
+        if (pw !== '4994') {
+          document.getElementById('del-err').textContent = '❌ Password salah! Cuba lagi.';
+          return;
+        }
+        this.textContent = 'Memadamkan...';
+        this.disabled = true;
+        try {
+          const res = await fetch(SB_URL + '/rest/v1/rsvp?id=eq.' + window._deleteId, {
+            method: 'DELETE',
+            headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY,
+                       'Content-Type': 'application/json', 'Prefer': 'return=minimal' }
+          });
+          if (res.ok || res.status === 204) {
+            document.getElementById('del-modal').style.display = 'none';
+            showAdminPage();
+          } else {
+            document.getElementById('del-err').textContent = '❌ Gagal padam. Cuba lagi.';
+            this.textContent = '🗑️ Padam'; this.disabled = false;
+          }
+        } catch(e) {
+          document.getElementById('del-err').textContent = '❌ Gagal sambung.';
+          this.textContent = '🗑️ Padam'; this.disabled = false;
+        }
+      };
+
+      window.askDelete = function(id, name) {
+        window._deleteId = id;
+        document.getElementById('del-pw').value = '';
+        document.getElementById('del-err').textContent = '';
+        document.getElementById('del-ok').textContent = '🗑️ Padam';
+        document.getElementById('del-ok').disabled = false;
+        document.getElementById('del-modal').style.display = 'flex';
+        setTimeout(() => document.getElementById('del-pw').focus(), 100);
+      };
 
       try {
         const r = await fetch(SB_URL + '/rest/v1/rsvp?select=*&order=created_at.desc', {
@@ -1941,7 +1998,7 @@
 
         // Summary cards
         document.getElementById('admin-stats').innerHTML = `
-          <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:24px;">
+          <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px;">
             ${[
               ['👥','Total Hadir',totalPax+' orang','#4a8f29','#a5d6a7'],
               ['📋','Total RSVP',data.length+' kumpulan','#1565c0','#90caf9'],
@@ -1950,22 +2007,22 @@
               ['👨‍👩‍👧‍👦','Keluarga',totalFamily+' orang','#4e342e','#ffccbc'],
               ['👫','Kawan/Rakan',totalFriends+' orang','#004d40','#80cbc4'],
             ].map(([icon,label,val,bg,col])=>`
-              <div style="background:#111;border:2px solid ${bg};border-radius:8px;padding:16px 20px;min-width:140px;flex:1;">
-                <div style="font-size:22px;margin-bottom:6px;">${icon}</div>
-                <div style="color:#aaa;font-size:12px;margin-bottom:4px;">${label}</div>
-                <div style="color:${col};font-size:22px;font-weight:bold;">${val}</div>
+              <div style="background:#111;border:2px solid ${bg};border-radius:8px;padding:14px 16px;min-width:120px;flex:1;">
+                <div style="font-size:20px;margin-bottom:4px;">${icon}</div>
+                <div style="color:#aaa;font-size:11px;margin-bottom:4px;">${label}</div>
+                <div style="color:${col};font-size:20px;font-weight:bold;">${val}</div>
               </div>`).join('')}
           </div>
-          <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:8px;">
+          <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:8px;">
             ${Object.entries(slots).map(([s,c])=>`
-              <div style="background:#111;border:1px solid #333;border-radius:6px;padding:12px 16px;min-width:100px;text-align:center;">
-                <div style="color:#ffe082;font-size:13px;font-weight:bold;">🕐 ${s}</div>
+              <div style="background:#111;border:1px solid #333;border-radius:6px;padding:10px 14px;min-width:80px;text-align:center;">
+                <div style="color:#ffe082;font-size:12px;font-weight:bold;">🕐 ${s}</div>
                 <div style="color:#fff;font-size:18px;font-weight:bold;margin-top:4px;">${c}</div>
                 <div style="color:#aaa;font-size:11px;">orang</div>
               </div>`).join('')}
           </div>`;
 
-        // Guest table
+        // Guest table — horizontally scrollable on mobile
         const fmt = ts => {
           if(!ts) return '-';
           const d = new Date(ts);
@@ -1975,36 +2032,39 @@
         };
 
         document.getElementById('admin-list').innerHTML = `
-          <div style="color:#81d4fa;font-size:13px;font-weight:bold;margin-bottom:12px;">📋 SENARAI TETAMU</div>
-          <div style="overflow-x:auto;">
-          <table style="width:100%;border-collapse:collapse;font-size:13px;color:#fff;">
+          <div style="color:#81d4fa;font-size:13px;font-weight:bold;margin-bottom:12px;">📋 SENARAI TETAMU (${data.length})</div>
+          <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:8px;">
+          <table style="width:100%;min-width:700px;border-collapse:collapse;font-size:13px;color:#fff;">
             <thead>
               <tr style="background:#1a1a3e;color:#ffe082;text-align:left;">
-                <th style="padding:10px 12px;border-bottom:2px solid #333;">#</th>
-                <th style="padding:10px 12px;border-bottom:2px solid #333;">Nama</th>
-                <th style="padding:10px 12px;border-bottom:2px solid #333;">Gender</th>
-                <th style="padding:10px 12px;border-bottom:2px solid #333;">Slot</th>
-                <th style="padding:10px 12px;border-bottom:2px solid #333;">Total</th>
-                <th style="padding:10px 12px;border-bottom:2px solid #333;">Dewasa ♂/♀</th>
-                <th style="padding:10px 12px;border-bottom:2px solid #333;">Kanak ♂/♀</th>
-                <th style="padding:10px 12px;border-bottom:2px solid #333;">Jenis</th>
-                <th style="padding:10px 12px;border-bottom:2px solid #333;">Baju</th>
-                <th style="padding:10px 12px;border-bottom:2px solid #333;">Tarikh & Masa</th>
+                <th style="padding:10px 8px;border-bottom:2px solid #333;white-space:nowrap;">#</th>
+                <th style="padding:10px 8px;border-bottom:2px solid #333;white-space:nowrap;">Nama</th>
+                <th style="padding:10px 8px;border-bottom:2px solid #333;white-space:nowrap;">Slot</th>
+                <th style="padding:10px 8px;border-bottom:2px solid #333;white-space:nowrap;">Total</th>
+                <th style="padding:10px 8px;border-bottom:2px solid #333;white-space:nowrap;">Dewasa ♂/♀</th>
+                <th style="padding:10px 8px;border-bottom:2px solid #333;white-space:nowrap;">Kanak ♂/♀</th>
+                <th style="padding:10px 8px;border-bottom:2px solid #333;white-space:nowrap;">Jenis</th>
+                <th style="padding:10px 8px;border-bottom:2px solid #333;white-space:nowrap;">Baju</th>
+                <th style="padding:10px 8px;border-bottom:2px solid #333;white-space:nowrap;">Masa</th>
+                <th style="padding:10px 8px;border-bottom:2px solid #333;white-space:nowrap;">Padam</th>
               </tr>
             </thead>
             <tbody>
               ${data.map((x,i)=>`
                 <tr style="background:${i%2===0?'#111':'#161625'};border-bottom:1px solid #222;">
-                  <td style="padding:10px 12px;color:#aaa;">${i+1}</td>
-                  <td style="padding:10px 12px;color:#ffe082;font-weight:bold;">${esc(x.guest_name||'?')}</td>
-                  <td style="padding:10px 12px;">${x.gender==='female'?'👩 Perempuan':'👨 Lelaki'}</td>
-                  <td style="padding:10px 12px;color:#81d4fa;">🕐 ${x.time_slot||'-'}</td>
-                  <td style="padding:10px 12px;color:#a5d6a7;font-weight:bold;">${x.total_pax||1} pax</td>
-                  <td style="padding:10px 12px;">${x.adult_male||0}♂ / ${x.adult_female||0}♀</td>
-                  <td style="padding:10px 12px;">${x.toddler_male||0}♂ / ${x.toddler_female||0}♀</td>
-                  <td style="padding:10px 12px;">${x.relation_type==='family'?'👨‍👩‍👧‍👦 Keluarga':x.relation_type==='friends'?'👫 Kawan':'-'}</td>
-                  <td style="padding:10px 12px;text-transform:capitalize;">${x.attire_colour||'-'}</td>
-                  <td style="padding:10px 12px;font-size:12px;color:#ccc;">${fmt(x.created_at)}</td>
+                  <td style="padding:8px;color:#aaa;">${i+1}</td>
+                  <td style="padding:8px;color:#ffe082;font-weight:bold;white-space:nowrap;">${esc(x.guest_name||'?')}</td>
+                  <td style="padding:8px;color:#81d4fa;white-space:nowrap;">🕐 ${x.time_slot||'-'}</td>
+                  <td style="padding:8px;color:#a5d6a7;font-weight:bold;white-space:nowrap;">${x.total_pax||1} pax</td>
+                  <td style="padding:8px;white-space:nowrap;">${x.adult_male||0}♂ ${x.adult_female||0}♀</td>
+                  <td style="padding:8px;white-space:nowrap;">${x.toddler_male||0}♂ ${x.toddler_female||0}♀</td>
+                  <td style="padding:8px;white-space:nowrap;">${x.relation_type==='family'?'👨‍👩‍👧‍👦':x.relation_type==='friends'?'👫':'-'}</td>
+                  <td style="padding:8px;text-transform:capitalize;white-space:nowrap;">${x.attire_colour||'-'}</td>
+                  <td style="padding:8px;font-size:11px;color:#ccc;white-space:nowrap;">${fmt(x.created_at)}</td>
+                  <td style="padding:8px;">
+                    <button onclick="askDelete('${x.id}','${esc(x.guest_name||'?')}')"
+                      style="background:#c62828;color:#fff;border:none;border-radius:4px;padding:6px 10px;cursor:pointer;font-size:15px;line-height:1;">🗑️</button>
+                  </td>
                 </tr>`).join('')}
             </tbody>
           </table>
